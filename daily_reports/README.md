@@ -2,6 +2,37 @@
 
 最近三天日报（最新在前）：
 
+# [20260501](./202605/20260501.md)
+## 📌 今日概况
+
+今日共检索候选论文 3 篇；关键词+LLM 智能匹配遥感交叉论文 3 篇；最终纳入日报 2 篇。
+
+今日遥感AI研究聚焦两大方向：一是基础模型在气溶胶光学厚度反演中的创新应用，利用PACE卫星高光谱数据探索Vision Transformer的潜力；二是生成式AI技术在遥感影像超分辨率重建中的新进展，Flow Matching方法为Sentinel-2数据增强提供了新思路。
+
+## ✨ 今日亮点
+
+- 基础AI模型首次应用于PACE卫星气溶胶光学厚度估算，拓展高光谱遥感应用边界
+- Flow Matching生成模型引入Sentinel-2超分辨率任务，为扩散模型提供高效替代方案
+- 跨机构合作凸显遥感AI研究的多学科融合趋势，涵盖大气科学与精准农业领域
+
+## 🗂 今日文章列表
+
+| 标题 | 作者 | 单位 | 一句话概括 | Issue |
+|---|---|---|---|---|
+| [20260501] Foundation AI Models for Aerosol Optical Depth Estimation from PACE Satellite Data | Zahid Hassan Tushar, Purushotham Sanjay | University of Maryland, Baltimore County | 该研究基于PACE卫星高光谱数据，构建Vision Transformer基础模型实现气溶胶光学厚度精准估算。 | [#454](https://github.com/thinson/RS-PaperClaw/issues/454) |
+| [20260501] Flow matching for Sentinel-2 super-resolution: implementation, application, and implications | Hester Dakota, Vitor S. Martins, Lucas B. Ferreira, Thainara M. A. Lima, Juliana A. Araújo | Department of Agricultural and Biological Engineering, Mississippi State University；North Mississippi Research and Extension Center, Mississippi State University | 该研究将Flow Matching生成模型应用于Sentinel-2影像超分辨率，系统评估其实现细节与应用效果。 | [#455](https://github.com/thinson/RS-PaperClaw/issues/455) |
+
+## 🔎 观察
+
+- 基础模型向地球科学专用领域渗透，高光谱卫星数据成为新的模型训练与验证资源
+- 扩散模型替代方案在遥感影像生成任务中受关注，计算效率与重建质量的权衡成为关键考量
+
+---
+
+Powered by OpenClaw🦞
+
+---
+
 # [20260430](./202604/20260430.md)
 ## 📌 今日概况
 
@@ -71,41 +102,6 @@ Powered by OpenClaw🦞
 
 - 开放词汇学习成为遥感语义分割热点方向，但几何一致性与语义一致性的联合优化仍具挑战。
 - 量子机器学习在遥感领域的应用尚处探索期，其表示优势需更多实际任务验证。
-
----
-
-Powered by OpenClaw🦞
-
----
-
-# [20260428](./202604/20260428.md)
-## 📌 今日概况
-
-今日共检索候选论文 12 篇；关键词+LLM 智能匹配遥感交叉论文 6 篇；最终纳入日报 6 篇。
-
-今日遥感AI研究呈现多元化趋势：卫星任务调度基准建设、量子启发式SAR分类、阴影感知图像修复、网络规模图像地理定位、边缘云协同重建及农业无人机检测等方向均有进展。计算效率与鲁棒性成为共同关注点，跨机构国际合作特征明显。
-
-## ✨ 今日亮点
-
-- EOS-Bench发布首个综合性地球观测卫星调度基准，覆盖敏捷卫星组合优化问题
-- 量子启发张量网络方法实现SAR目标分类的模型压缩与抗数据投毒能力
-- SARU框架统一阴影检测与去除任务，并构建遥感图像阴影处理新基准
-
-## 🗂 今日文章列表
-
-| 标题 | 作者 | 单位 | 一句话概括 | Issue |
-|---|---|---|---|---|
-| [20260428] EOS-Bench: A Comprehensive Benchmark for Earth Observation Satellite Scheduling | Yin Qian, Li Jiaxing, Cheng Jiaqi, Luo Qizhang, Riccardi Annalisa, Chatterjee Abhijit, Vazquez Rafael, Novara Carlo, Mavrovouniotis Michalis, Ponnuthurai Nagaratnam Suganthan, Bai Shengzhou, Hu Xiaoxuan, Xing Lining, Xu Ming, Li Shuang, Zheng Zixuan, Shen Xin, Chen Xiaoyu, Gu Yi, ..., Wang Xinwei | School of Traffic and Transportation Engineering, Central South University；School of Engineering and Materials Science, Queen Mary University of London；College of Automation, Central South University；Mechanical and Aerospace Engineering, University of Strathclyde；Department of Computer Science, University of Exeter；Department of Aerospace Engineering, Universidad de Sevilla；Department of Electronics and Telecommunications, Politecnico di Torino；ERATOSTHENES Centre of Excellence；Department of Civil Engineering and Geomatics, Cyprus University of Technology；Department of Computer Science and Engineering, College of Engineering, Qatar University；Department of Aerospace Engineering, Korea Advanced Institute of Science and Technology；School of Management, Hefei University of Technology；Key Laboratory of Collaborative Intelligence Systems, Ministry of Education, Xidian University；School of Astronautics, Beihang University；Advanced Space Technology Laboratory, College of Astronautics, Nanjing University of Aeronautics and Astronautics；National Key Laboratory of Aerospace Flight Dynamics, Northwestern Polytechnical University；State Key Laboratory of Information Engineering in Surveying, Mapping and Remote Sensing, Wuhan University；School of Computer Science, China University of Geosciences；School of Information Science and Technology, Dalian Maritime University；Department of Electrical & Computer Engineering, University of Alberta | EOS-Bench建立地球观测卫星调度综合基准，为组合优化算法提供标准化评估平台。 | [#420](https://github.com/thinson/RS-PaperClaw/issues/420) |
-| [20260428] Quantum-Inspired Robust and Scalable SAR Object Classification | Scharf Maximilian, Trenti Marco, Bock Felix, Davidson Padraig, Brosch Tobias, Benjamin Rodrigues de Miranda, Huber Sigurd, Felser Timo | Tensor AI Solutions GmbH；Hensoldt Sensors GmbH；German Aerospace Center (DLR)；Ulm University | 量子启发张量网络方法在SAR目标分类中实现鲁棒性与可扩展性的双重提升。 | [#421](https://github.com/thinson/RS-PaperClaw/issues/421) |
-| [20260428] SARU: A Shadow-Aware and Removal Unified Framework for Remote Sensing Images with New Benchmarks | Bo Zi-Yang, Lu Wei, Chen Hongruixuan, Chen Si-Bao, Luo Bin | Anhui University；The University of Tokyo | SARU框架将阴影检测与去除任务统一，并配套发布遥感图像阴影处理基准数据集。 | [#422](https://github.com/thinson/RS-PaperClaw/issues/422) |
-| [20260428] GeoSearch: Augmenting Worldwide Geolocalization with Web-Scale Reverse Image Search and Image Matching | Le-Duc Tung-Duong, Nguyen-Son Hoang-Quoc, Dao Minh-Son | University of Science, VNU-HCM；National Institute of Information and Communications Technology | GeoSearch结合网络规模反向图像搜索与大语言模型，增强全球图像地理定位能力。 | [#423](https://github.com/thinson/RS-PaperClaw/issues/423) |
-| [20260428] Edge-Cloud Collaborative Reconstruction via Structure-Aware Latent Diffusion for Downstream Remote Sensing Perception | Li Yun, Li Xianju | Chinese Academy of Sciences | 结构感知潜扩散模型支撑边缘云协同重建，服务于下游遥感感知任务。 | [#424](https://github.com/thinson/RS-PaperClaw/issues/424) |
-| [20260428] Towards Robust Deep Learning-based Rumex Obtusifolius Detection from Drone Images | Fabian Dionys Schrag, Mehmet Ozgur Turkoglu, Schindler Konrad, Ralph Lukas Stoop | Agroscope NBA；Agroscope Earth Observation of Agroecosystems Team；ETH Zurich | 针对无人机图像的钝叶酸模杂草检测研究，探索CNN与ViT的域适应鲁棒性。 | [#425](https://github.com/thinson/RS-PaperClaw/issues/425) |
-
-## 🔎 观察
-
-- 遥感AI正从单一任务优化转向系统级基准建设，EOS-Bench等工具将加速算法公平比较与产业落地。
-- 量子计算与边缘智能等新型计算范式开始渗透遥感领域，但其实际部署效益仍需工程验证。
 
 ---
 
