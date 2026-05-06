@@ -2,6 +2,36 @@
 
 最近三天日报（最新在前）：
 
+# [20260505](./202605/20260505.md)
+## 📌 今日概况
+
+今日共检索候选论文 6 篇；关键词+LLM 智能匹配遥感交叉论文 3 篇；最终纳入日报 1 篇。
+
+今日遥感AI研究聚焦物理建模与数据质量提升。单篇入选论文提出物理感知的数据集构建方法，针对高分辨率卫星影像去阴影任务，强调从合成数据生成源头解决真实场景适配问题，体现领域对物理可解释性与数据工程并重的趋势。
+
+## ✨ 今日亮点
+
+- 物理感知合成：将大气辐射传输模型嵌入阴影数据集生成流程
+- 任务针对性：专为高分辨率卫星影像阴影去除设计基准数据
+- 跨机构协作：奥地利、德国、英国多所高校与研究所联合攻关
+
+## 🗂 今日文章列表
+
+| 标题 | 作者 | 单位 | 一句话概括 | Issue |
+|---|---|---|---|---|
+| [20260505] deSEO: Physics-Aware Dataset Creation for High-Resolution Satellite Image Shadow Removal | Beltrame Lorenzo, Salzinger Jules, Svoboda Filip, Fanta-Jende Phillipp, Lampert Jasmin, Timofte Radu, Körner Marco | Austrian Institute of Technology；University of Cambridge；University of Würzburg；Technical University of Munich (TUM)；Technical University of Munich (TUM), Munich Data Science Institute (MDSI)；ELLIS Unit Jena, Friedrich Schiller University of Jena | deSEO提出物理感知的高分辨率卫星影像阴影去除数据集构建方法，通过嵌入辐射传输模型提升合成数据的真实场景适配性。 | [#469](https://github.com/thinson/RS-PaperClaw/issues/469) |
+
+## 🔎 观察
+
+- 卫星影像去阴影任务长期受困于真实标注稀缺，物理驱动的合成数据生成或成破局关键路径
+- 多机构跨国合作模式在遥感AI领域持续深化，欧洲研究网络在数据基础设施建设中表现活跃
+
+---
+
+Powered by OpenClaw🦞
+
+---
+
 # [20260504](./202605/20260504.md)
 ## 📌 今日概况
 
@@ -63,37 +93,6 @@ Powered by OpenClaw🦞
 
 - 具身智能正成为遥感AI新焦点，从ESARBench的搜救任务到EO-Gym的通用平台，学术社区开始系统性构建评估体系而非单一算法
 - 毫米波雷达与农业场景的结合揭示低空经济基础设施的技术缺口，传统光学感知在复杂环境下的鲁棒性替代方案值得持续关注
-
----
-
-Powered by OpenClaw🦞
-
----
-
-# [20260501](./202605/20260501.md)
-## 📌 今日概况
-
-今日共检索候选论文 3 篇；关键词+LLM 智能匹配遥感交叉论文 3 篇；最终纳入日报 2 篇。
-
-今日遥感AI研究聚焦两大方向：一是基础模型在气溶胶光学厚度反演中的创新应用，利用PACE卫星高光谱数据探索Vision Transformer的潜力；二是生成式AI技术在遥感影像超分辨率重建中的新进展，Flow Matching方法为Sentinel-2数据增强提供了新思路。
-
-## ✨ 今日亮点
-
-- 基础AI模型首次应用于PACE卫星气溶胶光学厚度估算，拓展高光谱遥感应用边界
-- Flow Matching生成模型引入Sentinel-2超分辨率任务，为扩散模型提供高效替代方案
-- 跨机构合作凸显遥感AI研究的多学科融合趋势，涵盖大气科学与精准农业领域
-
-## 🗂 今日文章列表
-
-| 标题 | 作者 | 单位 | 一句话概括 | Issue |
-|---|---|---|---|---|
-| [20260501] Foundation AI Models for Aerosol Optical Depth Estimation from PACE Satellite Data | Zahid Hassan Tushar, Purushotham Sanjay | University of Maryland, Baltimore County | 该研究基于PACE卫星高光谱数据，构建Vision Transformer基础模型实现气溶胶光学厚度精准估算。 | [#454](https://github.com/thinson/RS-PaperClaw/issues/454) |
-| [20260501] Flow matching for Sentinel-2 super-resolution: implementation, application, and implications | Hester Dakota, Vitor S. Martins, Lucas B. Ferreira, Thainara M. A. Lima, Juliana A. Araújo | Department of Agricultural and Biological Engineering, Mississippi State University；North Mississippi Research and Extension Center, Mississippi State University | 该研究将Flow Matching生成模型应用于Sentinel-2影像超分辨率，系统评估其实现细节与应用效果。 | [#455](https://github.com/thinson/RS-PaperClaw/issues/455) |
-
-## 🔎 观察
-
-- 基础模型向地球科学专用领域渗透，高光谱卫星数据成为新的模型训练与验证资源
-- 扩散模型替代方案在遥感影像生成任务中受关注，计算效率与重建质量的权衡成为关键考量
 
 ---
 
