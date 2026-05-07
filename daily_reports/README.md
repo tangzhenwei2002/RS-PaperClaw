@@ -2,6 +2,43 @@
 
 最近三天日报（最新在前）：
 
+# [20260506](./202605/20260506.md)
+## 📌 今日概况
+
+今日共检索候选论文 11 篇；关键词+LLM 智能匹配遥感交叉论文 9 篇；最终纳入日报 8 篇。
+
+今日遥感AI研究呈现三大趋势：一是基础模型轻量化适配（LoRA微调、扩散模型几何控制），二是自主智能体架构创新（多模态元规划器、视觉语言跟踪），三是零标注学习范式兴起（自监督地理推理、原型学习）。量子计算与模糊逻辑也开始渗透高光谱异常检测领域。
+
+## ✨ 今日亮点
+
+- LoRA微调地理基础模型实现野火精准制图，降低 Sentinel-2 应用门槛
+- 轻量化多模态元规划器框架打通遥感感知与决策执行闭环
+- 零标注地理推理模型 RemoteZero 突破人工标注依赖瓶颈
+
+## 🗂 今日文章列表
+
+| 标题 | 作者 | 单位 | 一句话概括 | Issue |
+|---|---|---|---|---|
+| [20260506] Hyperspectral Anomaly Detection Using Einstein Fuzzy Computing and Quantum Neural Network | Lin Chia-Hsiang, Young Si-Sheng, Langari Reza | the Department of Electrical Engineering, Na- verse network architectures；the Institute of Computer and Communication Engineer- Nevertheless, relying solely on residual-based detectors may；the Department of Mechanical Engineering, Texas | 爱因斯坦模糊计算与量子神经网络结合，为高光谱异常检测提供新型混合智能架构。 | [#335](https://github.com/thinson/RS-PaperClaw/issues/335) |
+| [20260506] Low-Rank Adaptation of Geospatial Foundation Models for Wildfire Mapping Using Sentinel-2 Data | Shibli Ali, Nascetti Andrea, Ban Yifang | KTH Royal Institute of Technology | 基于LoRA的地理基础模型参数高效微调，实现Sentinel-2野火燃烧区高精度自动提取。 | [#472](https://github.com/thinson/RS-PaperClaw/issues/472) |
+| [20260506] Bridging Perception and Action: A Lightweight Multimodal Meta-Planner Framework for Robust Earth Observation Agents | Xu Jinghui, Shangguan Boyi, Zhu Mengke, Liu Hao, Jiang Junhuan, He Guangjun, Feng Pengming, Jin Shichao, Liang Bin, Chang Yongzhe, Tan Junbo, Zhang Tiantian, Wang Xueqian | State Key Laboratory of Space Information System and Integrated Application | 轻量级多模态元规划器框架支撑地球观测智能体从感知到行动的自主闭环决策。 | [#473](https://github.com/thinson/RS-PaperClaw/issues/473) |
+| [20260506] VL-UniTrack: A Unified Framework with Visual-Language Prompts for UAV-Ground Visual Tracking | Xu Boyue, Hou Ruichao, Ren Tongwei, Wu Gangshan | State Key Laboratory for Novel Software Technology, Nanjing University | VL-UniTrack统一视觉语言提示框架，实现无人机与地面跨视角目标跟踪协同。 | [#474](https://github.com/thinson/RS-PaperClaw/issues/474) |
+| [20260507] Delay-Aware Large-Small Model Collaboration over LEO Satellite Networks | Guo Mingyu, Wu Wen, Wang Ying, Zhang Songge, Li Liang | Frontier Research Center, Pengcheng Laboratory；School of Information and Communication Engineering, Beijing University of Posts and Telecommunications | 大小模型协同架构结合多智能体强化学习，优化低轨卫星网络边缘计算任务卸载。 | [#475](https://github.com/thinson/RS-PaperClaw/issues/475) |
+| [20260507] Efficient Geometry-Controlled High-Resolution Satellite Image Synthesis | Vasilescu Vlad, Faur Daniela, Costăchioiu Teodor | Univ. POLITEHNICA Bucharest；SIGMA Lab, CAMPUS Institute；GEOSENSE, CAMPUS Institute | 几何约束扩散模型实现高分辨率卫星影像可控合成，提升生成图像空间精度。 | [#476](https://github.com/thinson/RS-PaperClaw/issues/476) |
+| [20260506] RemoteZero: Geospatial Reasoning with Zero Human Annotations | Yao Liang, Liu Fan, Xu Shengxiang, Zhang Chuanyi, Min Rui, Di Shimin, Zheng Yuhui | Hohai University；Southeast University | RemoteZero零标注框架以自监督强化学习驱动多模态大模型地理空间推理能力。 | [#477](https://github.com/thinson/RS-PaperClaw/issues/477) |
+| [20260506] UAV as Urban Construction Change Monitor: A New Benchmark and Change Captioning Model | Gao Yupeng, Li Tianyu, Wang Guoqing, Yang Yang | University of Electronic Science and Technology of China | 无人机城市建筑变化监测新基准与变化描述模型，推动细粒度时序遥感理解。 | [#478](https://github.com/thinson/RS-PaperClaw/issues/478) |
+
+## 🔎 观察
+
+- 参数高效微调（PEFT）正成为遥感基础模型落地的关键路径，LoRA等技术显著降低行业适配成本
+- 智能体架构从单一感知向"感知-规划-执行"全链条演进，多模态融合与元学习成为核心支撑技术
+
+---
+
+Powered by OpenClaw🦞
+
+---
+
 # [20260505](./202605/20260505.md)
 ## 📌 今日概况
 
@@ -60,39 +97,6 @@ Powered by OpenClaw🦞
 
 - 基础模型研究从'规模竞赛'转向'效率优化'，模型蒸馏与轻量化成为新焦点
 - 遥感应用持续下沉至发展中国家本地化场景，众源数据与开放工具链降低技术门槛
-
----
-
-Powered by OpenClaw🦞
-
----
-
-# [20260502](./202605/20260502.md)
-## 📌 今日概况
-
-今日共检索候选论文 10 篇；关键词+LLM 智能匹配遥感交叉论文 4 篇；最终纳入日报 4 篇。
-
-今日遥感AI研究呈现两大主线：一是智能体与仿真平台快速崛起，UAV搜救基准测试与地球观测交互环境相继发布；二是传感器融合持续深化，毫米波雷达与频域Transformer分别在农业低空感知与全色锐化领域取得进展。高校与产业界合作紧密，多模态大模型成为共性技术底座。
-
-## ✨ 今日亮点
-
-- ESARBench与EO-Gym双平台发布，推动遥感智能体从算法研究走向可交互、可评估的具身智能阶段
-- CGFformer将K-means聚类与频域Transformer结合，为全色锐化引入自适应频率分离新范式
-- 旋转毫米波雷达方案瞄准农业无人机地形感知，填补复杂农田环境下光学传感器失效的空白
-
-## 🗂 今日文章列表
-
-| 标题 | 作者 | 单位 | 一句话概括 | Issue |
-|---|---|---|---|---|
-| [20260502] CGFformer: Cluster-Guidance Frequency Transformer for Pansharpening | Zhou Zijian, Zhang Jianing, Sun Kai, Zhao Xiangyu, Zhang Chunxia, Cao Xiangyong | College of Artificial Intelligence, Xi'an Jiaotong University；School of Mathematics and Statistics, Xi'an Jiaotong University；School of Computer Science and Technology, Xi'an Jiaotong University | CGFformer提出聚类引导频域Transformer，通过K-means聚类实现自适应频率分离，优化全色锐化任务中的细节重建与光谱保真平衡。 | [#457](https://github.com/thinson/RS-PaperClaw/issues/457) |
-| [20260502] ESARBench: A Benchmark for Agentic UAV Embodied Search and Rescue | Zhang Daoxuan, Chen Ping, Zhou Jianyi, Yang Shuo | Harbin Institute of Technology, Shenzhen | ESARBench构建首个面向无人机搜救的具身智能基准，集成多模态大模型评估框架，为灾难响应场景的智能体能力量化提供标准化工具。 | [#458](https://github.com/thinson/RS-PaperClaw/issues/458) |
-| [20260502] Terrain Perception for Agricultural UAVs in Complex Farmland via Rotating mmWave Radar | Zhan Zhihao, Tao Le, Li Shaobin, Fang Chenxin, Yang Xingrui, Li Liang, Fan Rui, Ming Yuhang | School of Computer Science, Hangzhou Dianzi University；TopXGun Robotics；CARDC；College of Control Science and Engineering, Zhejiang University；College of Electronics and Information Engineering, Tongji University | 该研究设计旋转式毫米波雷达系统，解决农业无人机在扬尘、低光照复杂农田中的地形感知难题，支撑精准地形跟随飞行。 | [#459](https://github.com/thinson/RS-PaperClaw/issues/459) |
-| [20260502] EO-Gym: A Multimodal, Interactive Environment for Earth Observation Agents | Ma Sai, Li Zhuang, Li Sichao, Xu Xinyue, Zhu Ruibiao, Boston Tony, John A. Taylor | The Australian National University；Royal Melbourne Institute of Technology；University of Sydney；The Hong Kong University of Science and Technology | EO-Gym打造多模态交互式地球观测智能体环境，支持视觉-语言-地理空间数据融合，为遥感大模型的在线决策与工具调用能力训练提供基础设施。 | [#460](https://github.com/thinson/RS-PaperClaw/issues/460) |
-
-## 🔎 观察
-
-- 具身智能正成为遥感AI新焦点，从ESARBench的搜救任务到EO-Gym的通用平台，学术社区开始系统性构建评估体系而非单一算法
-- 毫米波雷达与农业场景的结合揭示低空经济基础设施的技术缺口，传统光学感知在复杂环境下的鲁棒性替代方案值得持续关注
 
 ---
 
