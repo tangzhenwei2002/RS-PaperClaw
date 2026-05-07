@@ -40,7 +40,7 @@ def fetch_url_with_retry(url: str, retries: int = 6, timeout: int = 90) -> str:
                 return response.read().decode("utf-8", errors="ignore")
         except HTTPError as exc:
             last_err = exc
-            if exc.code == 429:
+            if exc.code in (429, 503):
                 retry_after = exc.headers.get("Retry-After")
                 if retry_after and retry_after.isdigit():
                     wait_s = max(int(retry_after), 30)
@@ -87,7 +87,7 @@ def fetch_recent_candidates(
 
     for start in range(0, max_scan, page_size):
         if start > 0:
-            time.sleep(3)
+            time.sleep(10)
         params = {
             "search_query": query,
             "start": start,
