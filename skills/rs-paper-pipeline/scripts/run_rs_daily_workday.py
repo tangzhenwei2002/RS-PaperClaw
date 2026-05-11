@@ -14,13 +14,14 @@ import time
 import fcntl
 import re
 import subprocess
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from clients.github_ops import daily_report_file_exists, get_today_digest_issue
 from clients.notify_client import has_available_notify_channel, send_dingtalk_markdown, send_feishu_message
 from pipeline_config import build_runtime_env, get_repo, load_config
 
 CONFIG = load_config()
+BEIJING_TZ = timezone(timedelta(hours=8))
 LOCK_FILE = CONFIG.memory_dir / "rs_daily_workday.lock"
 STATE_DIR = CONFIG.pipeline_state_dir
 
@@ -365,7 +366,7 @@ def _run_step(date_str: str, step: str, cmd: list[str], ok_extra: dict | None = 
 
 
 def resolve_target_dates(today: datetime | None = None) -> list[str]:
-    now = today or datetime.now()
+    now = today or datetime.now(BEIJING_TZ)
     weekday = now.weekday()  # Monday=0
 
     # 默认按北京时间日期回溯抓取：

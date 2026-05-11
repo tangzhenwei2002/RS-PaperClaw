@@ -209,7 +209,7 @@ def main(dry_run=False, days_back=2, stats_out: str | None = None, target_date: 
         aid = task["candidate"]["arxiv_id"]
         issue_number = task["issue_number"]
         print(f"  -> 处理 {aid} | issue={issue_number or '-'} | reason={task['reason']}")
-        result = process_paper(aid, issue_number=issue_number)
+        result = process_paper(aid, issue_number=issue_number, target_date=target_date)
         if result is not None and hasattr(result, "number"):
             update_index_from_issue(index, aid, result)
         if result is None:

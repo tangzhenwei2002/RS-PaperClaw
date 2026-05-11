@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import subprocess
 import glob
+import re
 from pathlib import Path
 from datetime import datetime
 import json
@@ -76,7 +77,7 @@ def handle_figures(arxiv_id: str, pdf_path: Path, repo=None) -> list:
 
 # ============ 主流程 ============
 
-def process_paper(arxiv_id: str, issue_number: int | None = None, dry_run: bool = False, output_dir: str | None = None):
+def process_paper(arxiv_id: str, issue_number: int | None = None, dry_run: bool = False, output_dir: str | None = None, target_date: str | None = None):
     print(f"\n{'='*60}")
     print(f"处理论文: {arxiv_id}")
     print(f"{'='*60}")
@@ -166,8 +167,13 @@ def process_paper(arxiv_id: str, issue_number: int | None = None, dry_run: bool 
     log_step("GATE", "OK", "通过")
 
     log_step("STEP-5", "RUNNING", "生成报告")
-    date_str = info.get('date', datetime.now().strftime("%Y-%m-%d"))
-    title_date = date_str.replace("-", "")
+    # 优先使用 target_date（pipeline 指定的业务日期），避免 arXiv API 日期漂移
+    if target_date:
+        title_date = target_date
+        date_str = f"{target_date[:4]}-{target_date[4:6]}-{target_date[6:]}"
+    else:
+        date_str = info.get('date', datetime.now().strftime("%Y-%m-%d"))
+        title_date = date_str.replace("-", "")
     
     # 报告内容：PDF 前三页预览（1行3列）
     if uploaded:
@@ -196,7 +202,7 @@ def process_paper(arxiv_id: str, issue_number: int | None = None, dry_run: bool 
 | **标题** | {info['title']} |
 | **作者** | {info['authors']} |
 | **单位** | {info['institutions']} |
-| **日期** | {info['date']} |
+| **日期** | {date_str} |
 | **arXiv** | [abs](https://arxiv.org/abs/{arxiv_id}) \\| [pdf](https://arxiv.org/pdf/{arxiv_id}) |
 | **TL;DR** | {tldr} |
 | **摘要** | {abstract_short} |
@@ -288,10 +294,22 @@ Powered by OpenClaw🦞
                 break
 
     if target_issue is not None:
+        # 保留现有 issue 的日期标签，避免 arXiv API 日期漂移导致日报引用错乱
+        existing_labels = [l for l in target_issue.labels]
+        existing_date_label = None
+        for label in existing_labels:
+            if isinstance(label, str) and re.fullmatch(r"\d{8}", label):
+                existing_date_label = label
+                break
+            name = getattr(label, "name", "")
+            if re.fullmatch(r"\d{8}", name):
+                existing_date_label = name
+                break
+        final_date = existing_date_label or title_date
         target_issue.edit(
-            title=f"[{title_date}] {info['title'][:200]}",
+            title=f"[{final_date}] {info['title'][:200]}",
             body=report,
-            labels=[title_date] + tags,
+            labels=[final_date] + tags,
         )
         log_step("ISSUE", "UPDATED", f"#{target_issue.number}")
         print(f"\n✅ 完成！")
