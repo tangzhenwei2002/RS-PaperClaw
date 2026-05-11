@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import re
 import json
-import time
 from collections import defaultdict
 from pathlib import Path
 
@@ -15,12 +14,6 @@ CONFIG = load_config()
 
 def issue_data(issue) -> dict:
     return getattr(issue, "_rawData", None) or {}
-
-
-def extract_arxiv_id(issue: dict) -> str | None:
-    body = (issue or {}).get("body") or ""
-    match = re.search(r"arxiv\.org/abs/([^\)\s]+)", body)
-    return match.group(1).strip() if match else None
 
 
 def load_open_issues(repo):
@@ -49,37 +42,6 @@ def collect_papers_by_date(issues):
             digest_issue_by_date[dm.group(1)] = it
 
     return paper_by_date, digest_issue_by_date
-
-
-def collect_expected_papers(repo, date: str, expected_arxiv_ids: list[str], retries: int = 6, wait_s: int = 5):
-    expected = set(expected_arxiv_ids)
-    if not expected:
-        issues = load_open_issues(repo)
-        paper_by_date, _ = collect_papers_by_date(issues)
-        return sorted(paper_by_date.get(date, []), key=lambda x: x["number"])
-
-    last_items = []
-    for attempt in range(1, retries + 1):
-        issues = load_open_issues(repo)
-        matched = []
-        found_ids = set()
-        for issue in issues:
-            raw = issue_data(issue)
-            title = raw.get("title") or issue.title
-            if "日报" in title:
-                continue
-            aid = extract_arxiv_id(raw)
-            if aid in expected:
-                matched.append(raw)
-                found_ids.add(aid)
-        if found_ids == expected:
-            return sorted(matched, key=lambda x: x["number"])
-        last_items = matched
-        if attempt < retries:
-            time.sleep(wait_s)
-
-    missing = sorted(expected - {extract_arxiv_id(item) for item in last_items if extract_arxiv_id(item)})
-    raise RuntimeError(f"digest paper set incomplete for {date}, missing arxiv ids: {', '.join(missing)}")
 
 
 def main(target_date: str | None = None, stats_json: str | None = None):
@@ -114,14 +76,12 @@ def main(target_date: str | None = None, stats_json: str | None = None):
         return
 
     for date in dates:
-        expected_ids = []
-        if stats_map.get(date):
-            expected_ids = (
-                stats_map[date].get("successful_selected_arxiv_ids")
-                or stats_map[date].get("selected_arxiv_ids")
-                or []
-            )
-        papers = collect_expected_papers(repo, date, expected_ids) if expected_ids else sorted(paper_by_date[date], key=lambda x: x["number"])
+        # 以 issue 标签为准（paper_by_date），而非 stats 文件
+        # stats 可能因质量门禁失败等原因不完整，但只要 issue 有正确标签就应纳入日报
+        papers = sorted(paper_by_date.get(date, []), key=lambda x: x["number"])
+        if not papers:
+            print(f"NO_PAPERS date={date}")
+            continue
         validation_errors = validate_papers_for_digest(papers)
         if validation_errors:
             raise RuntimeError(
