@@ -58,7 +58,7 @@ def extract_paper_date(issue: dict) -> str | None:
     return title_match.group(1) if title_match else None
 
 
-def build_digest_with_llm(date: str, papers: list, stats: dict | None = None) -> str:
+def build_digest_with_llm(date: str, papers: list, stats: dict | None = None, failed_items: list[dict] | None = None) -> str:
     items = []
     for i, paper in enumerate(papers, 1):
         labels = [label["name"] for label in paper.get("labels", []) if label["name"] not in [date, "日报"]]
@@ -133,6 +133,20 @@ def build_digest_with_llm(date: str, papers: list, stats: dict | None = None) ->
         lines.append(
             f"| {paper['title']} | {paper['authors']} | {paper['institution']} | {summary} | [#{paper['issue']}]({paper['url']}) |"
         )
+
+    if failed_items:
+        lines += ["", "## ⚠️ 未纳入日报的匹配论文", ""]
+        lines.append("以下论文通过关键词/LLM 筛选，但在处理过程中失败未纳入日报。点击 arXiv 链接可查看原文。")
+        lines.append("")
+        lines.append("| 标题 | arXiv | 失败原因 |")
+        lines.append("|------|-------|----------|")
+        for item in failed_items:
+            title = item.get("title", "Unknown")
+            aid = item.get("arxiv_id", "")
+            error = item.get("error") or item.get("reason") or "未知"
+            arxiv_link = f"[{aid}](https://arxiv.org/abs/{aid})" if aid else "-"
+            lines.append(f"| {title} | {arxiv_link} | {error} |")
+        lines.append("")
 
     observations = data.get("observations") or [
         "基础模型与遥感任务结合持续增强，评测与推理能力成为关键。",

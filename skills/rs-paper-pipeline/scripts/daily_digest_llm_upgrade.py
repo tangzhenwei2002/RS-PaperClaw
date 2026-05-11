@@ -91,6 +91,7 @@ def main(target_date: str | None = None, stats_json: str | None = None):
             date,
             papers,
             stats=stats_map.get(date),
+            failed_items=(stats_map.get(date) or {}).get("failed_items"),
         )
         (out_dir / f"{date}.md").write_text(md, encoding="utf-8")
 

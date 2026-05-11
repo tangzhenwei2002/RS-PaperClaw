@@ -90,7 +90,7 @@ def process_paper(arxiv_id: str, issue_number: int | None = None, dry_run: bool 
     pdf_path, pdf_ok = download_pdf(arxiv_id)
     if not pdf_ok:
         log_step("STEP-1", "FAILED", "PDF 下载失败")
-        return None
+        return None, "PDF 下载失败"
 
     # 1.2 提取 abs 信息
     info = extract_abs_info(arxiv_id)
@@ -163,7 +163,7 @@ def process_paper(arxiv_id: str, issue_number: int | None = None, dry_run: bool 
         ok, errors = quality_gate(info, analysis, abstract_zh, len(uploaded))
     if not ok:
         log_step("GATE", "FAILED", "; ".join(errors))
-        return None
+        return None, f"质检未通过: {'; '.join(errors)}"
     log_step("GATE", "OK", "通过")
 
     log_step("STEP-5", "RUNNING", "生成报告")
@@ -277,7 +277,7 @@ Powered by OpenClaw🦞
         out_path = target_dir / f"{title_date}_{arxiv_id.replace('/', '_')}.json"
         out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
         log_step("ISSUE", "DRY_RUN", str(out_path))
-        return payload
+        return payload, None
 
     # 更新策略：指定 issue_number 时仅更新；未指定时仅匹配更新，不创建
     target_issue = None
@@ -286,7 +286,7 @@ Powered by OpenClaw🦞
             target_issue = repo.get_issue(issue_number)
         except Exception as e:
             log_step("ISSUE", "FAILED", f"指定 Issue 不存在: {issue_number}")
-            return None
+            return None, f"指定 Issue #{issue_number} 不存在"
     else:
         for issue in repo.get_issues(state='all'):
             if info['title'][:30] in issue.title:
@@ -313,7 +313,7 @@ Powered by OpenClaw🦞
         )
         log_step("ISSUE", "UPDATED", f"#{target_issue.number}")
         print(f"\n✅ 完成！")
-        return target_issue
+        return target_issue, None
 
     # 未指定 issue_number 且未匹配到现有 issue -> 创建新 issue
     new_issue = repo.create_issue(
@@ -323,10 +323,14 @@ Powered by OpenClaw🦞
     )
     log_step("ISSUE", "CREATED", f"#{new_issue.number}")
     print(f"\n✅ 完成！")
-    return new_issue
+    return new_issue, None
 
 if __name__ == "__main__":
     import sys
     arxiv_id = sys.argv[1] if len(sys.argv) > 1 else "2603.08556"
     issue_number = int(sys.argv[2]) if len(sys.argv) > 2 else None
-    process_paper(arxiv_id, issue_number)
+    result, err = process_paper(arxiv_id, issue_number)
+    if err:
+        print(f"❌ {err}")
+    elif result and hasattr(result, "number"):
+        print(f"✅ #{result.number}")
