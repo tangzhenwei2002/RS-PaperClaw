@@ -30,8 +30,16 @@ def has_remote_sensing_signal(text: str) -> bool:
     return any(pattern.search(text) for pattern in RS_MATCH_PATTERNS)
 
 
+def _retry_after_seconds(headers) -> int | None:
+    retry_after = headers.get("Retry-After") if headers else None
+    if retry_after and retry_after.isdigit():
+        return int(retry_after)
+    return None
+
+
 def fetch_url_with_retry(url: str, retries: int = 6, timeout: int = 90) -> str:
-    backoff = [2, 5, 10, 20, 30, 60]
+    backoff = [5, 15, 30, 60, 120, 240]
+    rate_limit_backoff = [60, 120, 240, 360, 600, 900]
     last_err = None
     for i in range(retries):
         try:
@@ -41,11 +49,10 @@ def fetch_url_with_retry(url: str, retries: int = 6, timeout: int = 90) -> str:
         except HTTPError as exc:
             last_err = exc
             if exc.code in (429, 503):
-                retry_after = exc.headers.get("Retry-After")
-                if retry_after and retry_after.isdigit():
-                    wait_s = max(int(retry_after), 30)
-                else:
-                    wait_s = max(30, backoff[min(i, len(backoff) - 1)] * 3)
+                wait_s = max(
+                    _retry_after_seconds(exc.headers) or 0,
+                    rate_limit_backoff[min(i, len(rate_limit_backoff) - 1)],
+                )
             else:
                 wait_s = backoff[min(i, len(backoff) - 1)]
             if i == retries - 1:
@@ -71,7 +78,7 @@ def fetch_recent_candidates(
             query_parts.append(f'all:"{keyword}"')
         else:
             query_parts.append(f"all:{keyword}")
-    query = " OR ".join(query_parts)
+    base_query = " OR ".join(query_parts)
     namespace = {"atom": "http://www.w3.org/2005/Atom"}
 
     if target_date:
@@ -80,67 +87,75 @@ def fetch_recent_candidates(
         today = datetime.now().date()
         valid_days = {today - timedelta(days=i) for i in range(days_back)}
 
-    items: list[dict[str, str]] = []
-    seen: set[str] = set()
-    page_size = min(max_results, 200)
-    max_scan = 3000
+    def run_query(query: str, max_scan: int, page_size: int) -> list[dict[str, str]]:
+        items: list[dict[str, str]] = []
+        seen: set[str] = set()
 
-    for start in range(0, max_scan, page_size):
-        if start > 0:
-            time.sleep(10)
-        params = {
-            "search_query": query,
-            "start": start,
-            "max_results": page_size,
-            "sortBy": "submittedDate",
-            "sortOrder": "descending",
-        }
-        url = f"{CONFIG.arxiv_api}?{urllib.parse.urlencode(params)}"
-        xml_text = fetch_url_with_retry(url, retries=4, timeout=90)
+        for start in range(0, max_scan, page_size):
+            if start > 0:
+                time.sleep(20 if target_date else 10)
+            params = {
+                "search_query": query,
+                "start": start,
+                "max_results": page_size,
+                "sortBy": "submittedDate",
+                "sortOrder": "descending",
+            }
+            url = f"{CONFIG.arxiv_api}?{urllib.parse.urlencode(params)}"
+            xml_text = fetch_url_with_retry(url, retries=6, timeout=90)
 
-        root = ET.fromstring(xml_text)
-        entries = root.findall("atom:entry", namespace)
-        if not entries:
-            break
+            root = ET.fromstring(xml_text)
+            entries = root.findall("atom:entry", namespace)
+            if not entries:
+                break
 
-        min_page_date = None
-        for entry in entries:
-            arxiv_id = (entry.find("atom:id", namespace).text or "").strip().split("/")[-1]
-            if arxiv_id in seen:
-                continue
-            seen.add(arxiv_id)
+            min_page_date = None
+            for entry in entries:
+                arxiv_id = (entry.find("atom:id", namespace).text or "").strip().split("/")[-1]
+                if arxiv_id in seen:
+                    continue
+                seen.add(arxiv_id)
 
-            title = (entry.find("atom:title", namespace).text or "").strip().replace("\n", " ")
-            abstract = (entry.find("atom:summary", namespace).text or "").strip().replace("\n", " ")
-            published = (entry.find("atom:published", namespace).text or "").strip()
-            try:
-                published_date = datetime.strptime(published[:10], "%Y-%m-%d").date()
-            except Exception:
-                continue
+                title = (entry.find("atom:title", namespace).text or "").strip().replace("\n", " ")
+                abstract = (entry.find("atom:summary", namespace).text or "").strip().replace("\n", " ")
+                published = (entry.find("atom:published", namespace).text or "").strip()
+                try:
+                    published_date = datetime.strptime(published[:10], "%Y-%m-%d").date()
+                except Exception:
+                    continue
 
-            if min_page_date is None or published_date < min_page_date:
-                min_page_date = published_date
+                if min_page_date is None or published_date < min_page_date:
+                    min_page_date = published_date
 
-            if published_date not in valid_days:
-                continue
+                if published_date not in valid_days:
+                    continue
 
-            text = f"{title}\n{abstract}"
-            if not has_remote_sensing_signal(text):
-                continue
+                text = f"{title}\n{abstract}"
+                if not has_remote_sensing_signal(text):
+                    continue
 
-            items.append(
-                {
-                    "arxiv_id": arxiv_id,
-                    "title": title,
-                    "abstract": abstract,
-                    "published": published[:10],
-                }
-            )
+                items.append(
+                    {
+                        "arxiv_id": arxiv_id,
+                        "title": title,
+                        "abstract": abstract,
+                        "published": published[:10],
+                    }
+                )
 
-        if target_date and min_page_date and min_page_date < next(iter(valid_days)):
-            break
+            if target_date and min_page_date and min_page_date < next(iter(valid_days)):
+                break
 
-    return items
+        return items
+
+    if target_date:
+        scoped_query = f"({base_query}) AND submittedDate:[{target_date}0000 TO {target_date}2359]"
+        items = run_query(scoped_query, max_scan=max_results, page_size=min(max_results, 100))
+        if items:
+            return items
+        print("  [arXiv] 日期限定查询返回 0，回退到提交时间扫描")
+
+    return run_query(base_query, max_scan=3000, page_size=min(max_results, 100 if target_date else 200))
 
 
 def download_pdf(arxiv_id: str) -> tuple[Path | None, bool]:
