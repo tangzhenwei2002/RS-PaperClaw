@@ -221,6 +221,28 @@ def _extract_latex_command_bodies(text: str, command: str) -> list[str]:
 
 def _latex_to_plain(text: str) -> str:
     plain = text or ""
+    accent_map = {
+        '\\"a': "ä",
+        '\\"o': "ö",
+        '\\"u': "ü",
+        '\\"A': "Ä",
+        '\\"O': "Ö",
+        '\\"U': "Ü",
+        "\\'e": "é",
+        "\\'E": "É",
+        "\\'a": "á",
+        "\\'A": "Á",
+        "\\'i": "í",
+        "\\'I": "Í",
+        "\\'o": "ó",
+        "\\'O": "Ó",
+        "\\'u": "ú",
+        "\\'U": "Ú",
+        "\\`e": "è",
+        "\\`E": "È",
+    }
+    for latex, unicode_char in accent_map.items():
+        plain = plain.replace(latex, unicode_char)
     plain = re.sub(r"\\(?:tt|small|footnotesize|scriptsize|hspace\*?)\s*(?:\{[^{}]*\})?", " ", plain)
     plain = re.sub(r"\\(?:url|href)\s*\{[^{}]*\}(?:\{[^{}]*\})?", " ", plain)
     plain = re.sub(r"\\[a-zA-Z]+\*?(?:\[[^\]]*\])?", " ", plain)
