@@ -2,6 +2,42 @@
 
 最近三天日报（最新在前）：
 
+# [20260518](./202605/20260518.md)
+## 📌 今日概况
+
+今日共检索候选论文 18 篇；关键词+LLM 智能匹配遥感交叉论文 7 篇；最终纳入日报 7 篇。
+
+今日遥感AI研究呈现多模态融合与生成式AI双主线并进态势。地球嵌入模型互补性评估、扩散模型在超分辨率与能源建模中的应用，以及视觉语言推理成为热点。同时，高光谱表征学习、主动三维场景图生成与无人机几何感知重建等方向亦有新进展，体现基础模型评估与下游任务创新的并重趋势。
+
+## ✨ 今日亮点
+
+- 地球嵌入模型互补性评估：系统分析多模型融合潜力，为遥感基础模型选择提供依据
+- 扩散模型多场景落地：超分辨率重建与建筑能源建模双管齐下，生成式AI应用深化
+- 原生多模态架构崛起：SkyNative探索无编码器视觉语言推理，降低模态对齐复杂度
+
+## 🗂 今日文章列表
+
+| 标题 | 作者 | 单位 | 一句话概括 | Issue |
+|---|---|---|---|---|
+| [20260518] Better Together: Evaluating the Complementarity of Earth Embedding Models | Thijs L van der Plas, Jacob JW Bakermans, Nedungadi Vishal, Tijūnaitytė Gabrielė, Rußwurm Marc, Ioannis N Athanasiadis | Wageningen University；University College London；University of Bonn | 首次系统评估地球嵌入模型的互补性，提出融合策略以提升遥感表征学习性能。 | [#560](https://github.com/thinson/RS-PaperClaw/issues/560) |
+| [20260518] LESSViT: Robust Hyperspectral Representation Learning under Spectral Configuration Shift | Si Haozhe, Wan Yuxuan, Wang Yuqing, Do Minh, Zhao Han | Department of Electrical and Computer Engineering；Siebel School of Computing and Data Science；University of Illinois Urbana-Champaign | 提出低秩分解与空间-光谱注意力机制，增强高光谱模型跨光谱配置的泛化能力。 | [#561](https://github.com/thinson/RS-PaperClaw/issues/561) |
+| [20260518] Fixed External Cameras as Common Prior Maps for Active 3D Scene Graph Generation | Modi Giorgia, Buoso Davide, Averta Giuseppe, Daniele De Martini | Mobile Robotics Group (MRG), University of Oxford；Visual and Multimodal Applied Learning Lab (VANDAL), Politecnico di Torino | 利用固定外部相机作为先验地图，实现主动探索驱动的三维场景图高效生成。 | [#562](https://github.com/thinson/RS-PaperClaw/issues/562) |
+| [20260518] SENSE: Satellite-based ENergy Synthesis for Sustainable Environment | Sun Kailai, He Mingyi, Huang Heye, Rong Can, Prakash Alok, Guo Baoshen, Wang Shenhao, Zhao Jinhua | SMART, Singapore；Massachusetts Institute of Technology；University of Florida | 基于扩散模型合成卫星图像，支撑城市建筑能源建模与可持续发展决策。 | [#563](https://github.com/thinson/RS-PaperClaw/issues/563) |
+| [20260518] Learning to Balance: Decoupled Siamese Diffusion Transformer for Reference-Based Remote Sensing Image Super-Resolution | Luo Bin, Dong Runmin, Luo Zhaoyang, Zhang Jinxiao, Zhao Jiyao, Wei Fan, Fu Haohuan | Tsinghua Shenzhen International Graduate School；Sun Yat-sen University；National Supercomputing Center in Shenzhen；Tsinghua University | 解耦孪生扩散Transformer平衡参考图像与生成质量，提升遥感超分辨率效果。 | [#564](https://github.com/thinson/RS-PaperClaw/issues/564) |
+| [20260518] SkyNative: A Native Multimodal Framework for Remote Sensing Visual Evidence Reasoning | Yang Xiao, Fu Ronghao, Lin Zhiwen, Duan Zhuoran, Zhu Jiashun, Hu Jiasen, Sun Lang, Zhang Weipeng, Liu Jiaqi, Na Xu, Liu Haoran, Zhang Weijie, Yang Bo | College of Computer Science and Technology, Jilin University；Key Laboratory of Symbolic Computation and Knowledge Engineering of Ministry of Education | 构建无编码器的原生多模态框架，实现遥感视觉证据的直接推理与可解释分析。 | [#565](https://github.com/thinson/RS-PaperClaw/issues/565) |
+| [20260518] UAVFF3D: A Geometry-Aware Benchmark for Feed-Forward UAV 3D Reconstruction | Yang Xiang, Wang Yongli, Li HaiFeng, Zhang Yunsheng | School of Geosciences and Info-Physics, Central South University | 发布几何感知无人机三维重建基准，推动前馈式重建与相机几何估计研究。 | [#566](https://github.com/thinson/RS-PaperClaw/issues/566) |
+
+## 🔎 观察
+
+- 扩散模型正从图像生成向超分辨率、能源建模等垂直场景渗透，技术成熟度显著提升
+- 遥感领域开始关注基础模型的系统评估与互补融合，预示从单模型竞赛向生态协作转变
+
+---
+
+Powered by OpenClaw🦞
+
+---
+
 # [20260517](./202605/20260517.md)
 ## 📌 今日概况
 
@@ -69,41 +105,6 @@ Powered by OpenClaw🦞
 
 - 视觉几何基础模型向三维点云任务迁移成为新方向，无训练范式降低数据依赖
 - Mamba架构在遥感多模态融合中加速渗透，状态空间模型或成CNN/Transformer替代方案
-
----
-
-Powered by OpenClaw🦞
-
----
-
-# [20260515](./202605/20260515.md)
-## 📌 今日概况
-
-今日共检索候选论文 14 篇；关键词+LLM 智能匹配遥感交叉论文 6 篇；最终纳入日报 6 篇。
-
-今日遥感AI研究呈现多模态融合与不确定性量化两大趋势。MLLM赋能农业景观分割、证据深度学习提升野火烟雾检测可靠性，同时自监督时空建模、扩散模型变化检测及文本引导图像重建等方向均有新进展，体现基础模型与任务专用方法的并行发展。
-
-## ✨ 今日亮点
-
-- 多模态大语言模型首次系统应用于高分辨率农业景观语义分割任务
-- 证据深度学习结合CBAM注意力机制实现野火烟雾密度不确定性量化
-- 发布49.2万样本长时序高光谱数据集，支撑时空自监督学习研究
-
-## 🗂 今日文章列表
-
-| 标题 | 作者 | 单位 | 一句话概括 | Issue |
-|---|---|---|---|---|
-| [20260515] MAgSeg: Segmentation of Agricultural Landscapes in High-Resolution Satellite Imagery using Multimodal Large Language Models | Tiwary Piyush, Ahuja Utkarsh, Sani Depanshu, Jayagopal Aishwarya, Gubbi Sagar, Venugopalan Subhashini, Talekar Alok, Rajan Vaibhav | Google DeepMind；Google；Indian Institute of Science | MAgSeg提出基于多模态大语言模型的农业景观分割框架，利用视觉-语言对齐提升高分辨率卫星影像的语义理解能力。 | [#544](https://github.com/thinson/RS-PaperClaw/issues/544) |
-| [20260515] Uncertainty-Aware Wildfire Smoke Density Classification from Satellite Imagery via CBAM-Augmented EfficientNet with Evidential Deep Learning | Chodavarapu Ranjith | Kent State University | 该研究将CBAM增强的EfficientNet与证据深度学习结合，在野火烟雾密度分类中实现显式不确定性估计。 | [#545](https://github.com/thinson/RS-PaperClaw/issues/545) |
-| [20260515] Highly Detailed and Generalizable Broadleaf Tree Crown Instance Segmentation from UAV Imagery | Nakada Mitsutaka, Ikebata Takahiko, Ikebata Kengo, Mizuno Yuji, Onoda Yusuke, Takeshige Ryuichi, Kyaw Kyaw Htoo, Kitayama Kanehiro, Ong Robert, Onishi Masanori | DeepForest Technologies Co., Ltd.；YM Lab.；Graduate School of Agriculture, Kyoto University；Graduate School of Science, Osaka Metropolitan University；Faculty of Tropical Forestry, Universiti Malaysia Sabah；Forest Research Centre, Sabah Forestry Department | 针对无人机阔叶林影像，开发高度精细且可泛化的单木树冠实例分割方法，融合多机构跨地域数据验证。 | [#546](https://github.com/thinson/RS-PaperClaw/issues/546) |
-| [20260515] ChronoEarth-492K: A Large Scale and Long Horizon Spatiotemporal Hyperspectral Earth Observation Dataset and Benchmark | Si Haozhe, Wan Yuxuan, Wang Yuqing, Do Minh, Zhao Han | Department of Electrical and Computer Engineering；Siebel School of Computing and Data Science；University of Illinois Urbana-Champaign | ChronoEarth-492K构建大规模长时序高光谱地球观测数据集，为时空自监督学习提供标准化基准。 | [#547](https://github.com/thinson/RS-PaperClaw/issues/547) |
-| [20260515] LDGUID: A FRAMEWORK FOR ROBUST CHANGE DETECTION VIA LATENT DIFFERENCE GUIDANCE | Zhao Jiaxuan, Bereyhi Ali | University of Toronto | LDGUID通过潜在差异引导与信息瓶颈约束，提升对抗自编码器在变化检测中的鲁棒性与语义判别能力。 | [#548](https://github.com/thinson/RS-PaperClaw/issues/548) |
-| [20260515] Text-RSIR: A Text-Guided Framework for Efficient Remote Sensing Image Transmission and Reconstruction | Yang Hao, Ma Xianping, Ma Peifeng, Pun Man-On | School of Science and Engineering, The Chinese University of Hong Kong, Shenzhen；Geosciences and Engineering, Southwest Jiaotong University；Institute of Space and Earth Information Science and the Department of Geography and Resource Management, The Chinese University of Hong Kong | Text-RSIR建立文本引导的遥感图像传输重建框架，利用跨模态先验实现高效压缩与高质量恢复。 | [#549](https://github.com/thinson/RS-PaperClaw/issues/549) |
-
-## 🔎 观察
-
-- 基础模型下沉趋势明显：MLLM、扩散模型等通用架构正快速向遥感专用任务渗透，但领域适配机制尚待深化。
-- 不确定性量化关注度提升：从野火烟雾到变化检测，可靠性建模成为遥感AI落地应用的关键瓶颈与研究方向。
 
 ---
 
