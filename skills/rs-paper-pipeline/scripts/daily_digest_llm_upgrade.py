@@ -132,7 +132,7 @@ def main(target_date: str | None = None, stats_json: str | None = None):
         # issue number, then merge with the regular date-labeled issue scan.
         papers = _augment_papers_from_stats(repo, paper_by_date.get(date, []), stats_map.get(date))
         papers = sorted(papers, key=lambda x: x["number"])
-        if not papers:
+        if not papers and date not in stats_map:
             print(f"NO_PAPERS date={date}")
             continue
         validation_errors = validate_papers_for_digest(papers)

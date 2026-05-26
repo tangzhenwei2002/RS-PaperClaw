@@ -51,7 +51,7 @@ def quality_gate(info: dict, analysis: dict, abstract_zh: str, uploaded_images: 
         errors.append("标题为空或无效")
     if not info.get("authors") or has_bad_placeholder(info.get("authors")):
         errors.append("作者为空或无效")
-    if not info.get("institutions") or has_bad_placeholder(info.get("institutions")):
+    if not is_valid_institution_text(info.get("institutions", "")):
         errors.append("单位为空或无效")
     if not info.get("date"):
         errors.append("日期为空")
@@ -117,7 +117,33 @@ def _dedupe_institutions(institutions: list[str]) -> list[str]:
 
 def is_valid_institution_text(text: str) -> bool:
     normalized = (text or "").strip()
-    return normalized not in {"", "-"} and not has_bad_placeholder(normalized)
+    if normalized in {"", "-"} or has_bad_placeholder(normalized):
+        return False
+
+    # Affiliation extraction can occasionally bleed into the abstract/body when
+    # PDF text columns are interleaved. Treat sentence-like research prose as
+    # invalid so contaminated metadata is refreshed instead of entering reports.
+    prose_pattern = re.compile(
+        r"\b("
+        r"abstract|introduction|keywords?|while|whereas|however|therefore|"
+        r"paper|propos(?:e|ed|es|ing)|method|approach|network|model|"
+        r"dataset|image|images|pixels?|patch|patches|segmentation|"
+        r"classification|detection|experiments?|results?|performance|"
+        r"capture|learn(?:ing)?|strategy|benchmark"
+        r")\b",
+        re.IGNORECASE,
+    )
+    for chunk in re.split(r"[；;]", normalized):
+        part = re.sub(r"\s+", " ", chunk).strip(" ,;:，；：")
+        if not part:
+            continue
+        if len(part) > 180:
+            return False
+        if prose_pattern.search(part):
+            return False
+        if re.search(r"\.\s+[A-Z][a-z]+", part):
+            return False
+    return True
 
 
 def _heuristic_institutions(first_page_text: str) -> list[str]:

@@ -17,7 +17,7 @@ from clients.llm_client import call_llm
 from paper_processor import process_paper
 from pipeline_config import get_repo, load_config
 from services.filter_assets import load_ai_signal_patterns, render_filter_prompt
-from services.digest_builder import extract_author, extract_institution, is_invalid_digest_field
+from services.digest_builder import extract_author, extract_institution, is_invalid_digest_field, is_invalid_digest_institution
 from services.issue_index import ensure_index, lookup_issue, update_index_from_issue, save_index
 
 CONFIG = load_config()
@@ -105,7 +105,7 @@ def issue_has_valid_metadata(issue) -> bool:
     return (
         not is_invalid_digest_field(authors)
         and "et al." not in authors
-        and not is_invalid_digest_field(institution)
+        and not is_invalid_digest_institution(institution)
     )
 
 

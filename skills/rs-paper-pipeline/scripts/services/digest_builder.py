@@ -5,6 +5,7 @@ import json
 import re
 
 from clients.llm_client import call_llm
+from services.paper_analysis import is_valid_institution_text
 
 
 def extract_author(body: str) -> str:
@@ -22,6 +23,10 @@ def is_invalid_digest_field(value: str) -> bool:
     return normalized in {"", "-", "待提取", "未知", "Unknown", "N/A"}
 
 
+def is_invalid_digest_institution(value: str) -> bool:
+    return not is_valid_institution_text(value)
+
+
 def validate_papers_for_digest(papers: list[dict]) -> list[str]:
     errors: list[str] = []
     for paper in papers:
@@ -30,7 +35,7 @@ def validate_papers_for_digest(papers: list[dict]) -> list[str]:
         institution = extract_institution(paper.get("body") or "")
         if is_invalid_digest_field(authors) or "et al." in authors:
             errors.append(f"{title}: 作者信息不合格")
-        if is_invalid_digest_field(institution):
+        if is_invalid_digest_institution(institution):
             errors.append(f"{title}: 单位信息不合格")
     return errors
 
@@ -73,6 +78,33 @@ def build_digest_with_llm(date: str, papers: list, stats: dict | None = None, fa
                 "url": paper["html_url"],
             }
         )
+
+    if not items:
+        candidate_count = (stats or {}).get("candidate_count", 0)
+        llm_selected_count = (stats or {}).get("llm_selected_count", len(failed_items or []))
+        overview_text = (
+            f"今日共检索候选论文 {candidate_count} 篇；"
+            f"关键词+LLM 智能匹配遥感交叉论文 {llm_selected_count} 篇；"
+            "最终纳入日报 0 篇。\n\n"
+        )
+        if llm_selected_count:
+            overview_text += "当日筛中论文均未通过处理或质检，未纳入日报。"
+        else:
+            overview_text += "当日未检索到符合条件并纳入日报的论文。"
+
+        lines = [f"# 日报 {date}", "", "## 📌 今日概况", "", overview_text, ""]
+        append_failed_items(lines, failed_items)
+        lines += [
+            "## 🔎 观察",
+            "",
+            "- 当日无成功纳入论文，建议优先检查候选筛选结果与失败原因。",
+            "- 若连续出现空日报，应复核 arXiv 日期窗口、关键词配置与 LLM 筛选输出。",
+            "",
+            "---",
+            "",
+            "Powered by OpenClaw🦞",
+        ]
+        return "\n".join(lines)
 
     prompt = (
         "你是遥感AI日报编辑。请基于给定论文列表输出严格JSON：\n"
@@ -134,19 +166,7 @@ def build_digest_with_llm(date: str, papers: list, stats: dict | None = None, fa
             f"| {paper['title']} | {paper['authors']} | {paper['institution']} | {summary} | [#{paper['issue']}]({paper['url']}) |"
         )
 
-    if failed_items:
-        lines += ["", "## ⚠️ 未纳入日报的匹配论文", ""]
-        lines.append("以下论文通过关键词/LLM 筛选，但在处理过程中失败未纳入日报。点击 arXiv 链接可查看原文。")
-        lines.append("")
-        lines.append("| 标题 | arXiv | 失败原因 |")
-        lines.append("|------|-------|----------|")
-        for item in failed_items:
-            title = item.get("title", "Unknown")
-            aid = item.get("arxiv_id", "")
-            error = item.get("error") or item.get("reason") or "未知"
-            arxiv_link = f"[{aid}](https://arxiv.org/abs/{aid})" if aid else "-"
-            lines.append(f"| {title} | {arxiv_link} | {error} |")
-        lines.append("")
+    append_failed_items(lines, failed_items)
 
     observations = data.get("observations") or [
         "基础模型与遥感任务结合持续增强，评测与推理能力成为关键。",
@@ -158,3 +178,21 @@ def build_digest_with_llm(date: str, papers: list, stats: dict | None = None, fa
 
     lines += ["", "---", "", "Powered by OpenClaw🦞"]
     return "\n".join(lines)
+
+
+def append_failed_items(lines: list[str], failed_items: list[dict] | None) -> None:
+    if not failed_items:
+        return
+
+    lines += ["", "## ⚠️ 未纳入日报的匹配论文", ""]
+    lines.append("以下论文通过关键词/LLM 筛选，但在处理过程中失败未纳入日报。点击 arXiv 链接可查看原文。")
+    lines.append("")
+    lines.append("| 标题 | arXiv | 失败原因 |")
+    lines.append("|------|-------|----------|")
+    for item in failed_items:
+        title = item.get("title", "Unknown")
+        aid = item.get("arxiv_id", "")
+        error = item.get("error") or item.get("reason") or "未知"
+        arxiv_link = f"[{aid}](https://arxiv.org/abs/{aid})" if aid else "-"
+        lines.append(f"| {title} | {arxiv_link} | {error} |")
+    lines.append("")
