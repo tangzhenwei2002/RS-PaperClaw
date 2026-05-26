@@ -2,6 +2,49 @@
 
 最近三天日报（最新在前）：
 
+# [20260525](./202605/20260525.md)
+## 📌 今日概况
+
+今日共检索候选论文 13 篇；关键词+LLM 智能匹配遥感交叉论文 6 篇；最终纳入日报 5 篇。
+
+今日遥感AI研究聚焦三维空间智能与低空经济应用。多模态大模型开始探索高度信息消除二维歧义，无人机相关研究涵盖异常检测、动作识别与空域规划，超宽幅图像分割方法亦有新进展，体现从感知向认知与决策的延伸趋势。
+
+## ✨ 今日亮点
+
+- VertiCue-Bench首次系统评估MLLMs利用冠层高度模型解决二维语义歧义的能力
+- SFR-Net提出尺度-视锥体表征，针对性解决超宽幅遥感图像分割中的尺度与上下文连续性难题
+- AeroTSBoost结合时序统计特征与LightGBM，面向真实场景无人机遥测异常挖掘
+
+## 🗂 今日文章列表
+
+| 标题 | 作者 | 单位 | 一句话概括 | Issue |
+|---|---|---|---|---|
+| [20260525] VertiCue-Bench: Diagnosing Whether MLLMs Use Height Cues to Resolve 2D Ambiguity in Remote Sensing Natural Scenes | Huang Jing, Wang Duanchu, Yang Junjie, Cheng Zihang, Li Cheng, Cui Lin, Wu Zhouyi, Wang Di | Xi'an Jiaotong University；Xidian University；University of Chinese Academy of Sciences | VertiCue-Bench构建诊断基准，检验多模态大语言模型是否利用高度线索消解遥感自然场景的二维歧义。 | [#614](https://github.com/thinson/RS-PaperClaw/issues/614) |
+| [20260525] SFR-Net: Learning Scale-Frustum Representations for Ultra-Wide Area Remote Sensing Image Segmentation | Zhong Chuyu, Chen Keyan, Yang Qinzhe, Chen Bowen, Zou Zhengxia, Shi Zhenwei | Shen Yuan Honors College, Beihang University；the College of Computing and patches. While this processing strategy can capture abun- | SFR-Net学习尺度-视锥体表征，兼顾超宽幅遥感图像的多尺度建模与上下文语义连续性。 | [#615](https://github.com/thinson/RS-PaperClaw/issues/615) |
+| [20260525] AeroTSBoost: Temporal-Statistical Boosting for Real-World UAV Telemetry Anomaly Mining | Wei Junhao, Li Haochen, Li Yanxiao, Zhao Yifu, Yao Dexing, Lu Baili, Ye Xudong, Im Sio-Kei, Wang Yapeng, Yang Xu | Faculty of Applied Sciences, Macao Polytechnic University；Pazhou Lab (Huangpu)；Macao Polytechnic University | AeroTSBoost融合时序统计增强与LightGBM，提升真实世界无人机遥测数据异常检测性能。 | [#616](https://github.com/thinson/RS-PaperClaw/issues/616) |
+| [20260525] UAV-OVO: Out-of-Viewpoint Generalization in UAV Action Recognition | Xia Yu, Zhang Zhengbo, Zhang Shuaihu, Tu Zhigang | Wuhan University；Singapore University of Technology and Design | UAV-OVO研究无人机动作识别中的跨视角泛化问题，提升模型对分布外视角的鲁棒性。 | [#617](https://github.com/thinson/RS-PaperClaw/issues/617) |
+| [20260525] Location Prior Generation via Multi-Source Urban Data Fusion for Low-Altitude Air Mobility | Xie Xiang, Liu Xiaonan | the School of Natural and Computing Science, University of Aberdeen, Aberdeen, U.K | 通过多源城市数据融合生成位置先验，支撑低空空中交通的建筑物高度估计与空域规划。 | [#618](https://github.com/thinson/RS-PaperClaw/issues/618) |
+
+## ⚠️ 未纳入日报的匹配论文
+
+以下论文通过关键词/LLM 筛选，但在处理过程中失败未纳入日报。点击 arXiv 链接可查看原文。
+
+| 标题 | arXiv | 失败原因 |
+|------|-------|----------|
+| Leveraging Space-Time Synchronization for Ultra-Spot Detection in mmWave/THz UAV-to-UAV Communications | [2605.25321v1](https://arxiv.org/abs/2605.25321v1) | 质检未通过: 单位为空或无效 |
+
+
+## 🔎 观察
+
+- 三维地理空间推理成为多模态大模型新考点，高度信息正从辅助数据升格为核心推理依据
+- 低空经济驱动无人机研究分化：感知层（异常/动作识别）与规划层（空域/高度估计）并行发展
+
+---
+
+Powered by OpenClaw🦞
+
+---
+
 # [20260523](./202605/20260523.md)
 ## 📌 今日概况
 
@@ -62,43 +105,6 @@ Powered by OpenClaw🦞
 
 - 遥感目标检测正从纯视觉特征转向视觉-语言联合表征，属性级语义对齐成为新方向
 - 保形预测等不确定性量化技术引入，标志遥感AI从追求精度向可信决策演进
-
----
-
-Powered by OpenClaw🦞
-
----
-
-# [20260521](./202605/20260521.md)
-## 📌 今日概况
-
-今日共检索候选论文 12 篇；关键词+LLM 智能匹配遥感交叉论文 8 篇；最终纳入日报 8 篇。
-
-今日遥感AI研究聚焦无人机智能感知与三维地物分类两大主线。无人机检测与控制持续深化，涉及运动解耦、视觉伺服、通感一体化等关键技术；多光谱LiDAR与深度学习结合推动三维土地利用分类发展；生成式模型与高斯溅射技术为遥感超分辨率重建提供新路径。
-
-## ✨ 今日亮点
-
-- 无人机检测领域提出双区间运动线索解耦方法，分离自身运动与目标动态
-- 通感一体化(ISAC)成为热点，两篇论文分别探索能效优化与多模态协同感知
-- 多光谱LiDAR结合Point Transformer推动三维土地利用分类技术演进
-
-## 🗂 今日文章列表
-
-| 标题 | 作者 | 单位 | 一句话概括 | Issue |
-|---|---|---|---|---|
-| [20260521] Decoupling Ego-Motion from Target Dynamics via Dual-Interval Motion Cues for UAV Detection | Wang Liuyang, Zhang Feitian | the Robotics and Control Laboratory, Department of Robotics, School of Advanced Manufacturing and Robotics；the State Key Laboratory of Turbulence and Complex Systems, Peking University, Beijing, , China | 通过双区间运动线索解耦自身运动与目标动态，提升无人机视频目标检测性能。 | [#594](https://github.com/thinson/RS-PaperClaw/issues/594) |
-| [20260521] UAV-based Energy-Efficient Data Collection in Smart Grids with ISAC QoS Guarantees | Xie Yibin, Zhao Jin, Dey Indrakshi, Marchetti Nicola | Department of Electronic and Electrical Engineering, Trinity College Dublin；Walton Institute, South East Technological University | 设计满足ISAC服务质量约束的无人机能效数据采集方案，服务于智能电网应用。 | [#595](https://github.com/thinson/RS-PaperClaw/issues/595) |
-| [20260521] Terminal Constraint Model Predictive Control for Image-Based Visual Servoing of UAVs with Kalman Filter-Based Moment Loss Compensation | Wang X., Cao Y., W. L. W. Leong, Y. R. Tan, Huang S., S. H. R. Teo, Xiang C. | College of Design and Engineering, National University of Singapore | 融合终端约束模型预测控制与卡尔曼滤波矩损失补偿，实现无人机图像视觉伺服。 | [#596](https://github.com/thinson/RS-PaperClaw/issues/596) |
-| [20260521] 3D LULC classification using multispectral LiDAR and deep learning: current and prospective schemes | Takhtkeshha Narges, Rizaldy Aldino, Hollaus Markus, Hyyppä Juha, Remondino Fabio, Mandlburger Gottfried | 3D Optical Metrology (3DOM) Unit, Bruno Kessler Foundation (FBK)；Department of Geodesy and Geoinformation, TU Wien；Helmholtz-Zentrum Dresden-Rossendorf (HZDR), Helmholtz Institute Freiberg for Resource Technology (HIF)；Freie Universität Berlin, Remote Sensing and Geoinformatics；Department of Remote Sensing and Photogrammetry, Finnish Geospatial Research Institute FGI, The National Land Survey of Finland | 系统综述多光谱LiDAR与深度学习在三维土地利用分类中的现状与发展方向。 | [#597](https://github.com/thinson/RS-PaperClaw/issues/597) |
-| [20260521] Impact of Atmospheric Turbulence and Pointing Error on Earth Observation | Sánchez-de-Miguel Celia, Antonio M. Mercado-Martínez, Soret Beatriz, Jurado-Navas Antonio, Castillo-Vázquez Miguel | TELMA, University of Malaga | 量化分析大气湍流与指向误差对地观测图像退化的影响机制。 | [#598](https://github.com/thinson/RS-PaperClaw/issues/598) |
-| [20260521] Flow-based Gaussian Splatting for Continuous-Scale Remote Sensing Image Super-Resolution | Mo Jiangwei, Lu Xi, Wu Hanlin | the School of Information Science and Technol- We then learn a conditional flow transport from noise to this | 基于流匹配的高斯溅射方法实现连续尺度遥感图像超分辨率重建。 | [#599](https://github.com/thinson/RS-PaperClaw/issues/599) |
-| [20260521] A Camera-Cooperative ISAC Framework for Multimodal Non-Cooperative UAVs Sensing | Wu Wenfeng, Xiang Luping, Yang Kun | the State Key Laboratory of Novel Software Technology, Nanjing University, Nanjing, , China, Institute of Intelligent Networks and Communications | 构建相机协同通感一体化框架，实现多模态非合作无人机感知与波束跟踪。 | [#600](https://github.com/thinson/RS-PaperClaw/issues/600) |
-| [20260521] Non-Contact Vibration-Based Damage Detection of Civil Structures Using a Cost-Effective Autonomous UAV | Becerril Javier, Vargas Maximiliano, Herrera Jennifer, Gutierrez Joanna, Rios Jorge, Amjadian Mohsen, Tarawneh Constantine, Yang Jinghao, Lu Qi | Department of Computer Science, The University of Texas at Rio Grande Valley (UTRGV), Edinburg, TX, USA.；Department of Electrical and Computer Engineering at UTRGV. | 开发低成本自主无人机系统，基于非接触振动分析实现土木工程结构损伤检测。 | [#601](https://github.com/thinson/RS-PaperClaw/issues/601) |
-
-## 🔎 观察
-
-- ISAC技术正从通信与雷达分离架构向深度融合演进，无人机作为移动节点成为关键载体。
-- 三维点云语义分割从RGB点云向多光谱LiDAR扩展，光谱-几何联合特征学习将成为重点。
 
 ---
 
