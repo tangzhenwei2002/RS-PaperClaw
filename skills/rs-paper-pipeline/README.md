@@ -42,14 +42,15 @@ cd skills/rs-paper-pipeline
 Fill `.env` with at least:
 
 - `GITHUB_TOKEN`
-- `BAILIAN_API_KEY`
+- `LLM_API_KEY`
 
 Optional:
 
 - `DINGTALK_WEBHOOK`
 - `FEISHU_TARGET`
 - `RS_GITHUB_REPO`
-- `BAILIAN_MODEL`
+- `LLM_MODEL`
+- `LLM_API_URL`
 
 ## Main commands
 

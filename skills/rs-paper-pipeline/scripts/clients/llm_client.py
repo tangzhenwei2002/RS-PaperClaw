@@ -19,22 +19,24 @@ def load_prompt(filename: str) -> str:
 
 
 def call_llm(prompt: str, max_tokens: int = 4096, timeout: int = 300) -> str:
-    if not CONFIG.bailian_api_key:
-        raise RuntimeError("Missing required environment variable: BAILIAN_API_KEY")
+    if not CONFIG.llm_api_key:
+        raise RuntimeError("Missing required environment variable: LLM_API_KEY")
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {CONFIG.bailian_api_key}",
+        "Authorization": f"Bearer {CONFIG.llm_api_key}",
     }
     data = {
-        "model": CONFIG.bailian_model,
+        "model": CONFIG.llm_model,
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": max_tokens,
         "temperature": 0.3,
+        "thinking": {"type": "disabled"},
+        "stream": False,
     }
     try:
         req = urllib.request.Request(
-            CONFIG.bailian_api_url,
+            CONFIG.llm_api_url,
             data=json.dumps(data).encode("utf-8"),
             headers=headers,
             method="POST",
@@ -45,4 +47,3 @@ def call_llm(prompt: str, max_tokens: int = 4096, timeout: int = 300) -> str:
     except Exception as exc:
         print(f"    ❌ LLM 调用失败: {exc}")
         return ""
-

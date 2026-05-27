@@ -152,15 +152,17 @@
 
 - `GITHUB_TOKEN`
   用来读写 issue、同步 `daily_reports/`
-- `BAILIAN_API_KEY`
+- `LLM_API_KEY`
   用来调用 LLM
 
 ### 5.2 常用可选项
 
 - `RS_GITHUB_REPO`
   目标仓库，默认是 `thinson/RS-PaperClaw`
-- `BAILIAN_MODEL`
+- `LLM_MODEL`
   使用的模型名
+- `LLM_API_URL`
+  OpenAI-compatible Chat Completions 接口地址
 - `GITHUB_TIMEOUT`
   GitHub API 超时秒数
 - `GITHUB_RETRY`

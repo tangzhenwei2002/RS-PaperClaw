@@ -109,9 +109,9 @@ class PipelineConfig:
     github_token: str | None
     github_timeout: int
     github_retry: int
-    bailian_api_url: str
-    bailian_api_key: str | None
-    bailian_model: str
+    llm_api_url: str
+    llm_api_key: str | None
+    llm_model: str
     openclaw_bin: str | None
     feishu_target: str | None
     dingtalk_webhook: str | None
@@ -140,9 +140,9 @@ def load_config() -> PipelineConfig:
         github_token=_env("GITHUB_TOKEN"),
         github_timeout=int(_env("GITHUB_TIMEOUT", "15")),
         github_retry=int(_env("GITHUB_RETRY", "2")),
-        bailian_api_url=_env("BAILIAN_API_URL", "https://coding.dashscope.aliyuncs.com/v1/chat/completions"),
-        bailian_api_key=_env("BAILIAN_API_KEY"),
-        bailian_model=_env("BAILIAN_MODEL", "kimi-k2.5"),
+        llm_api_url=_env("LLM_API_URL", "https://api.deepseek.com/chat/completions"),
+        llm_api_key=_env("LLM_API_KEY"),
+        llm_model=_env("LLM_MODEL", "deepseek-v4-flash"),
         openclaw_bin=_env("OPENCLAW_BIN"),
         feishu_target=_env("FEISHU_TARGET"),
         dingtalk_webhook=_env("DINGTALK_WEBHOOK"),

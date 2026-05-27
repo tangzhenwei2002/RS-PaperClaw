@@ -100,11 +100,13 @@ python3 scripts/cli.py doctor
 最少需要提供：
 
 - `GITHUB_TOKEN`
-- `BAILIAN_API_KEY`
+- `LLM_API_KEY`
 
 常用可选项：
 
 - `RS_GITHUB_REPO`
+- `LLM_MODEL`
+- `LLM_API_URL`
 - `RS_PROXY_URL`
 - `RS_WORKSPACE`
 - `OPENCLAW_BIN`

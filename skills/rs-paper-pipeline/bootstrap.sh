@@ -21,7 +21,7 @@ echo "[3/5] installing python dependencies"
 if [ ! -f "${ROOT_DIR}/.env" ]; then
   echo "[4/5] creating .env from .env.example"
   cp "${ROOT_DIR}/.env.example" "${ROOT_DIR}/.env"
-  echo "      fill in GITHUB_TOKEN and BAILIAN_API_KEY before running the pipeline"
+  echo "      fill in GITHUB_TOKEN and LLM_API_KEY before running the pipeline"
 else
   echo "[4/5] .env already exists"
 fi

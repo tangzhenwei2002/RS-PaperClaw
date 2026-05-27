@@ -472,8 +472,8 @@ def _process_date(date_str: str, notify: bool, force: bool = False):
 def main(target_date: str | None = None, notify: bool | None = None, force: bool = False):
     if not CONFIG.github_token:
         raise RuntimeError("Missing required environment variable: GITHUB_TOKEN")
-    if not CONFIG.bailian_api_key:
-        raise RuntimeError("Missing required environment variable: BAILIAN_API_KEY")
+    if not CONFIG.llm_api_key:
+        raise RuntimeError("Missing required environment variable: LLM_API_KEY")
 
     if target_date:
         target_dates = [target_date]

@@ -52,7 +52,7 @@ def main() -> int:
         )
     )
 
-    for var_name in ("GITHUB_TOKEN", "BAILIAN_API_KEY"):
+    for var_name in ("GITHUB_TOKEN", "LLM_API_KEY"):
         present = bool(os.environ.get(var_name))
         checks.append((present, check_mark(var_name, present, "set" if present else "missing")))
 

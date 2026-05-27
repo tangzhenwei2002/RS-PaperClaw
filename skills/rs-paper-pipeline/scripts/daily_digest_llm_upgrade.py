@@ -105,8 +105,8 @@ def _augment_papers_from_stats(repo, papers: list[dict], stats: dict | None) -> 
 def main(target_date: str | None = None, stats_json: str | None = None):
     if not CONFIG.github_token:
         raise RuntimeError("Missing required environment variable: GITHUB_TOKEN")
-    if not CONFIG.bailian_api_key:
-        raise RuntimeError("Missing required environment variable: BAILIAN_API_KEY")
+    if not CONFIG.llm_api_key:
+        raise RuntimeError("Missing required environment variable: LLM_API_KEY")
 
     repo = get_repo(CONFIG)
 

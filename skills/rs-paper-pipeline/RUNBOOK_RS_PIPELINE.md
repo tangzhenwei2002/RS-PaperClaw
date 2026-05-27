@@ -4,7 +4,7 @@
 ```bash
 cd /path/to/RS-PaperClaw_pipeline
 ./bootstrap.sh
-# 如 .env 是首次生成，编辑它并填入 GITHUB_TOKEN 和 BAILIAN_API_KEY
+# 如 .env 是首次生成，编辑它并填入 GITHUB_TOKEN 和 LLM_API_KEY
 ```
 
 如需代理，可在 `.env` 中设置：
@@ -135,10 +135,11 @@ pkill -f daily_arxiv_cross_filter.py
 建议配置：
 
 - Secret: `RS_GITHUB_TOKEN`
-- Secret: `BAILIAN_API_KEY`
+- Secret: `LLM_API_KEY`
 - Secret: `DINGTALK_WEBHOOK`（如需通知）
 - Variable: `RS_GITHUB_REPO`
-- Variable: `BAILIAN_MODEL`
+- Variable: `LLM_MODEL`
+- Variable: `LLM_API_URL`
 
 行为说明：
 

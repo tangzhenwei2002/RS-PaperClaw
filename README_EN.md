@@ -133,7 +133,7 @@ cd skills/rs-paper-pipeline
 Required:
 
 - `GITHUB_TOKEN`
-- `BAILIAN_API_KEY`
+- `LLM_API_KEY`
 
 Optional:
 

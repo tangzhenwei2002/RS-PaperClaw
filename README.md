@@ -133,7 +133,7 @@ cd skills/rs-paper-pipeline
 至少填写：
 
 - `GITHUB_TOKEN`
-- `BAILIAN_API_KEY`
+- `LLM_API_KEY`
 
 可选：
 

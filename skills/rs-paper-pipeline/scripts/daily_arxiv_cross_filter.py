@@ -121,8 +121,8 @@ def load_existing_issue_map(repo, index: dict[str, dict], arxiv_ids: list[str]) 
 def main(dry_run=False, days_back=2, stats_out: str | None = None, target_date: str | None = None):
     if not CONFIG.github_token:
         raise RuntimeError("Missing required environment variable: GITHUB_TOKEN")
-    if not CONFIG.bailian_api_key:
-        raise RuntimeError("Missing required environment variable: BAILIAN_API_KEY")
+    if not CONFIG.llm_api_key:
+        raise RuntimeError("Missing required environment variable: LLM_API_KEY")
 
     repo = get_repo(CONFIG)
     index = ensure_index(repo)
