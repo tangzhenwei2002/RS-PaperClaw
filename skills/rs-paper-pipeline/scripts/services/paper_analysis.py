@@ -129,7 +129,8 @@ def is_valid_institution_text(text: str) -> bool:
         r"paper|propos(?:e|ed|es|ing)|method|approach|network|model|"
         r"dataset|image|images|pixels?|patch|patches|segmentation|"
         r"classification|detection|experiments?|results?|performance|"
-        r"capture|learn(?:ing)?|strategy|benchmark"
+        r"capture|learn(?:ing)?|strategy|benchmark|supported|grants?|"
+        r"foundation|funds?|project|computational|constraints?|resources?"
         r")\b",
         re.IGNORECASE,
     )
@@ -217,6 +218,16 @@ def _extract_footnote_block(first_page_text: str) -> str:
     return text[earliest:]
 
 
+def _compact_pdf_left_column(text: str) -> str:
+    lines: list[str] = []
+    for raw_line in (text or "").splitlines():
+        left_column = re.split(r"\s{8,}(?=[a-z•])", raw_line.strip(), maxsplit=1)[0]
+        line = re.sub(r"\s+", " ", left_column).strip()
+        if line:
+            lines.append(line)
+    return " ".join(lines)
+
+
 def _parse_ieee_footnote(footnote: str, known_authors: str) -> list[str]:
     """Parse IEEE-style "is with / was with" affiliation sentences."""
     institutions: list[str] = []
@@ -227,17 +238,21 @@ def _parse_ieee_footnote(footnote: str, known_authors: str) -> list[str]:
         r"大学|学院|研究所|实验室|中心|医院|研究院)",
         re.IGNORECASE,
     )
+    compact = _compact_pdf_left_column(footnote)
 
     for match in re.finditer(
-        r"(?:are|is|was|were)\s+(?:all\s+)?(?:currently\s+)?with\s+(.+?)(?:\s+E-?mail[:：]|\s*\(|\s*\[|\s*[–—]|\.$|\n)",
-        footnote,
+        r"(?:are|is|was|were)\s+(?:all\s+)?(?:currently\s+)?with\s+(.+?)"
+        r"(?=(?:\s+[A-Z][A-Za-z'.-]+(?:\s+[A-Z][A-Za-z'.-]+){0,5}\s+"
+        r"(?:are|is|was|were)\s+(?:all\s+)?(?:currently\s+)?with\b)"
+        r"|\s+E-?mail[:：]|\s*\(|\s*\[|\s*[–—]|\.$)",
+        compact,
         re.IGNORECASE,
     ):
         chunk = match.group(1).strip().rstrip(" ,;.")
         chunk = re.sub(r"\b\d{4,6}\b", "", chunk)
         chunk = re.sub(r"\s+", " ", chunk)
-        for phrase in re.split(r",\s+and\s+|,\s*and\s+also\s+|\band\s+also\b", chunk):
-            phrase = phrase.strip().rstrip(" ,;.")
+        for phrase in re.split(r",\s*and\s+also\s+|,\s+and\s+|\band\s+also\b", chunk):
+            phrase = re.sub(r"^(?:also\s+)?with\s+", "", phrase.strip(), flags=re.IGNORECASE).rstrip(" ,;.")
             if kw.search(phrase):
                 institutions.append(phrase)
 
@@ -367,6 +382,8 @@ def _institutions_from_latex_affiliation_body(body: str) -> list[str]:
     parsed = _parse_ieee_footnote(plain, "")
     if parsed:
         return parsed
+    if re.search(r"\b(?:supported|grant|foundation|funds?|project)\b", plain, re.IGNORECASE):
+        return []
     return _heuristic_institutions(plain)
 
 

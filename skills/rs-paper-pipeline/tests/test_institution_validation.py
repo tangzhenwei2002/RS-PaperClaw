@@ -69,6 +69,26 @@ class InstitutionValidationTest(unittest.TestCase):
             "Ocean University of China；Peking University；Monash University",
         )
 
+    def test_extracts_ieee_thanks_affiliations_from_source(self):
+        tex = r"""
+        \thanks{This work was supported by the National Natural Science Foundation of China.}
+        \thanks{Chuyu Zhong, Bowen Chen, Zhengxia Zou, and Zhenwei Shi are with the Department of Aerospace Intelligent Science and Technology, School of Astronautics, Beihang University, Beijing 100191, China, and also with the Key Laboratory of Spacecraft Design Optimization and Dynamic Simulation Technologies, Ministry of Education, Beihang University, Beijing 100191, China. Qinzhe Yang is with Shen Yuan Honors College, Beihang University, Beijing 100191, China. Keyan Chen is with the College of Computing and Data Science, Nanyang Technological University, Singapore.}
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+            source_path = Path(temp_dir) / "source.tar"
+            tex_path = Path(temp_dir) / "main.tex"
+            tex_path.write_text(tex, encoding="utf-8")
+            with tarfile.open(source_path, "w") as archive:
+                archive.add(tex_path, arcname="main.tex")
+
+            institutions = extract_institutions_from_latex_source(source_path)
+
+        self.assertIn("School of Astronautics, Beihang University", institutions)
+        self.assertIn("Key Laboratory of Spacecraft Design Optimization", institutions)
+        self.assertIn("Shen Yuan Honors College, Beihang University", institutions)
+        self.assertIn("College of Computing and Data Science, Nanyang Technological University", institutions)
+        self.assertNotIn("supported", institutions)
+
     def test_extracts_footnote_affiliations_before_email(self):
         first_page = """
         Geo-Expert: Towards Expert-Level Geological Reasoning
