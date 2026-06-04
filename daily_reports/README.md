@@ -2,6 +2,46 @@
 
 最近三天日报（最新在前）：
 
+# [20260603](./202606/20260603.md)
+## 📌 今日概况
+
+今日共检索候选论文 6 篇；关键词+LLM 智能匹配遥感交叉论文 3 篇；最终纳入日报 1 篇。
+
+今日研究聚焦于低空网络中的HAPs-UAV双基地ISARAC系统，提出联合三维轨迹与功率分配优化方法，旨在提升覆盖范围与续航能力。该工作体现了遥感与通信融合的趋势，为低空网络资源调度提供了新思路。
+
+## ✨ 今日亮点
+
+- 提出HAPs-UAV双基地ISARAC联合优化方案
+- 兼顾三维轨迹与功率分配提升网络性能
+- 聚焦低空网络覆盖与续航协同问题
+
+## 🗂 今日文章列表
+
+| 标题 | 作者 | 单位 | 一句话概括 | Issue |
+|---|---|---|---|---|
+| [20260603] Joint 3D Trajectory and Power Allocation for HAPs-UAV Bistatic ISARAC in Low-Altitude Networks | Huang Bang, Alouini Mohamed-Slim | and Engineering (CEMSE) division in King Abdullah University of Science much broader coverage and signiﬁcantly longer endurance | 研究HAPs-UAV双基地ISARAC中联合三维轨迹与功率分配优化。 | [#668](https://github.com/thinson/RS-PaperClaw/issues/668) |
+
+## ⚠️ 未纳入日报的匹配论文
+
+以下论文通过关键词/LLM 筛选，但在处理过程中失败未纳入日报。点击 arXiv 链接可查看原文。
+
+| 标题 | arXiv | 失败原因 |
+|------|-------|----------|
+| Data Efficient Complex Feature Fusion Network For Hyperspectral Image Classification | [2606.04710v1](https://arxiv.org/abs/2606.04710v1) | 质检未通过: 单位为空或无效 |
+| Optical-Guided Neural Collapse for SAR Few-Shot Class Incremental Learning | [2606.04528v1](https://arxiv.org/abs/2606.04528v1) | 质检未通过: 单位为空或无效 |
+
+
+## 🔎 观察
+
+- 低空网络资源调度正从单一维度向多维度联合优化演进
+- 双基地ISARAC系统有望成为低空遥感与通信融合的关键架构
+
+---
+
+Powered by OpenClaw🦞
+
+---
+
 # [20260602](./202606/20260602.md)
 ## 📌 今日概况
 
@@ -73,48 +113,6 @@ Powered by OpenClaw🦞
 
 - 基础模型正从单一像素分析向融合矢量语义与多模态数据演进。
 - 轻量化与物理引导成为星上及边缘部署遥感模型的关键趋势。
-
----
-
-Powered by OpenClaw🦞
-
----
-
-# [20260531](./202605/20260531.md)
-## 📌 今日概况
-
-今日共检索候选论文 11 篇；关键词+LLM 智能匹配遥感交叉论文 5 篇；最终纳入日报 4 篇。
-
-今日遥感AI研究聚焦于智能感知与计算效率。葡萄叶片光谱预测利用多头注意力网络实现性状到光谱的映射；UAV雷达搜索通过在线学习优化策略应对场景噪声与漂移；空间事件视觉与星上传感器计算则分别探索了神经形态相机与TinyML在低功耗地球观测中的应用，展现了从算法到硬件的全链条创新趋势。
-
-## ✨ 今日亮点
-
-- 多头注意力网络提升叶片光谱预测精度
-- 在线学习优化UAV雷达搜索策略
-- 事件视觉与星上计算推动低功耗遥感
-
-## 🗂 今日文章列表
-
-| 标题 | 作者 | 单位 | 一句话概括 | Issue |
-|---|---|---|---|---|
-| [20260531] Leaf Spectral Reflectance Prediction Using Multi-Head Attention Neural Networks | Farajpoor Parastoo, Pourreza Alireza, Narimani Mohammadreza, El-Kereamy Ashraf, Matthew W. Fidelibus | a Digital Agriculture Laboratory, Department of Biological and Agricultural Engineering, University；b Department of Botany and Plant Sciences, University of California, Riverside, CA, USA；c Department of Viticulture and Enology, University of California, Davis, CA, USA | 多头注意力网络预测葡萄叶片光谱，实现性状到光谱的映射 | [#650](https://github.com/thinson/RS-PaperClaw/issues/650) |
-| [20260531] SEArch: Optimistic Policy Selection Between Scene Noise and Drift for UAV Radar Search | Khial Noor, Mhaisen Naram, Ismail Loay, Mohamed Amr | ∗ College of Engineering, Qatar University, Qatar；† Faculty of Electrical Engineering, Mathematics, and Computer Science, Delft University of Technology, The Netherlands | SEArch算法在线选择策略，优化UAV雷达在噪声与漂移下的搜索 | [#651](https://github.com/thinson/RS-PaperClaw/issues/651) |
-| [20260531] Event-Based Vision in Space: Applications, Trends, and Future Directions | Capogrosso Luigi, Bonazzi Pietro, Magno Michele | Interdisciplinary Transformation University of Austria；ETH Zurich | 综述事件视觉在空间应用中的趋势与未来方向 | [#652](https://github.com/thinson/RS-PaperClaw/issues/652) |
-| [20260531] Exploiting In-Sensor Computing for Energy-Efficient Earth Observation | Capogrosso Luigi, Bonazzi Pietro, Hoxhaj Loris, Magno Michele | Interdisciplinary Transformation University of Austria；ETH Zurich；University of Verona | 利用星上传感器计算与TinyML实现低功耗地球观测 | [#653](https://github.com/thinson/RS-PaperClaw/issues/653) |
-
-## ⚠️ 未纳入日报的匹配论文
-
-以下论文通过关键词/LLM 筛选，但在处理过程中失败未纳入日报。点击 arXiv 链接可查看原文。
-
-| 标题 | arXiv | 失败原因 |
-|------|-------|----------|
-| Rank-Aware Quantile Activation for Motion-Robust Crop Segmentation in UAV Imagery | [2606.01118v1](https://arxiv.org/abs/2606.01118v1) | 质检未通过: 单位为空或无效 |
-
-
-## 🔎 观察
-
-- 注意力机制与在线学习正成为遥感智能感知的核心技术
-- 低功耗、星上处理是未来地球观测系统的重要发展方向
 
 ---
 
