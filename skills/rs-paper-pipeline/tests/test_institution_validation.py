@@ -89,6 +89,91 @@ class InstitutionValidationTest(unittest.TestCase):
         self.assertIn("College of Computing and Data Science, Nanyang Technological University", institutions)
         self.assertNotIn("supported", institutions)
 
+    def test_extracts_neurips_author_block_affiliations_from_source(self):
+        tex = r"""
+        \author{
+        Dimitri Gominski\textsuperscript{1}\!\!\And
+        Maurice Mugabowindekwe \textsuperscript{1,2}\!\!\And
+        Qiue Xu \textsuperscript{3}\!\!\And
+        Loic Landrieu \textsuperscript{6}\!\!\and
+        \textsuperscript{1}University of Copenhagen
+        \and \textsuperscript{2}University of Rwanda
+        \and \textsuperscript{3}University of Chinese Academy of Sciences
+        \and \textsuperscript{6}LIGM, CNRS, Univ Gustave Eiffel, ENPC, IPP
+        }
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+            source_path = Path(temp_dir) / "source.tar"
+            tex_path = Path(temp_dir) / "main.tex"
+            tex_path.write_text(tex, encoding="utf-8")
+            with tarfile.open(source_path, "w") as archive:
+                archive.add(tex_path, arcname="main.tex")
+
+            institutions = extract_institutions_from_latex_source(source_path)
+
+        self.assertEqual(
+            institutions,
+            "University of Copenhagen；University of Rwanda；"
+            "University of Chinese Academy of Sciences；"
+            "LIGM, CNRS, Univ Gustave Eiffel, ENPC, IPP",
+        )
+
+    def test_extracts_ieee_authorblock_affiliations_before_email(self):
+        tex = r"""
+        \author{
+        \IEEEauthorblockA{
+        \IEEEauthorrefmark{1}Image Processing Department,
+        Fraunhofer ITWM,
+        Kaiserslautern, Germany,\\
+        \{vladyslav.polushko, ronald.roesch, markus.rauhut\}@itwm.fraunhofer.de
+        }
+        \IEEEauthorblockA{
+        \IEEEauthorrefmark{2}ACIDA Lab,
+        Hochschule Darmstadt,
+        Darmstadt, Germany.
+        \{vladyslav.polushko, thomas.maerz\}@h-da.de
+        }
+        \IEEEauthorblockA{
+        \IEEEauthorrefmark{3}
+        Institut f{\"u}r Optische Sensorsysteme, DLR,
+        Berlin, Germany,
+        tilman.bucher@dlr.de
+        }
+        }
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+            source_path = Path(temp_dir) / "source.tar"
+            tex_path = Path(temp_dir) / "main.tex"
+            tex_path.write_text(tex, encoding="utf-8")
+            with tarfile.open(source_path, "w") as archive:
+                archive.add(tex_path, arcname="main.tex")
+
+            institutions = extract_institutions_from_latex_source(source_path)
+
+        self.assertIn("Image Processing Department, Fraunhofer ITWM", institutions)
+        self.assertIn("ACIDA Lab, Hochschule Darmstadt", institutions)
+        self.assertIn("Institut für Optische Sensorsysteme, DLR", institutions)
+        self.assertNotIn("@", institutions)
+
+    def test_extracts_ieee_while_and_now_with_affiliations(self):
+        tex = r"""
+        \thanks{Zhongcheng Hong completed this work while with The Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China, and is now with Auckland University of Technology, Auckland, New Zealand (e-mail: zhongcheng.hong@autuni.ac.nz).}
+        \thanks{Ying-Cong Chen and Hui Xiong are also with the Department of Computer Science and Engineering, The Hong Kong University of Science and Technology, Hong Kong SAR, China.}
+        """
+        with tempfile.TemporaryDirectory() as temp_dir:
+            source_path = Path(temp_dir) / "source.tar"
+            tex_path = Path(temp_dir) / "main.tex"
+            tex_path.write_text(tex, encoding="utf-8")
+            with tarfile.open(source_path, "w") as archive:
+                archive.add(tex_path, arcname="main.tex")
+
+            institutions = extract_institutions_from_latex_source(source_path)
+
+        self.assertIn("The Hong Kong University of Science and Technology (Guangzhou)", institutions)
+        self.assertIn("Auckland University of Technology", institutions)
+        self.assertIn("Department of Computer Science and Engineering", institutions)
+        self.assertNotIn("completed this work", institutions)
+
     def test_extracts_footnote_affiliations_before_email(self):
         first_page = """
         Geo-Expert: Towards Expert-Level Geological Reasoning

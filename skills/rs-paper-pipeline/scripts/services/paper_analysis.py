@@ -115,6 +115,32 @@ def _dedupe_institutions(institutions: list[str]) -> list[str]:
     return cleaned
 
 
+INSTITUTION_KEYWORD_PATTERN = re.compile(
+    r"(universit|univ\b|college|school|institut|academy|laborator|centre|center|"
+    r"department|hospital|faculty|laboratory|lab\b|research|hochschule|fraunhofer|"
+    r"dlr\b|cnrs\b|enpc\b|国家|大学|学院|研究所|实验室|中心|医院)",
+    re.IGNORECASE,
+)
+
+
+def _strip_email_tail(text: str) -> str:
+    """Remove email lists that commonly follow affiliation text."""
+    cleaned = re.split(
+        r"\b(?:Correspondence|Corresponding author|E-?mail|Emails?)[:：]?\b",
+        text or "",
+        maxsplit=1,
+        flags=re.IGNORECASE,
+    )[0]
+    cleaned = re.split(
+        r"\s+[A-Za-z0-9._%+-]*\.[A-Za-z0-9._%+-]*"
+        r"(?:,\s*[A-Za-z0-9._%+-]*\.[A-Za-z0-9._%+-]*)*\s*@\s*\S+",
+        cleaned,
+        maxsplit=1,
+    )[0]
+    cleaned = re.split(r"\s+[A-Za-z0-9._%+-]+\s*@\s*\S+", cleaned, maxsplit=1)[0]
+    return cleaned.strip(" ,;:，；：")
+
+
 def is_valid_institution_text(text: str) -> bool:
     normalized = (text or "").strip()
     if normalized in {"", "-"} or has_bad_placeholder(normalized):
@@ -123,15 +149,18 @@ def is_valid_institution_text(text: str) -> bool:
     # Affiliation extraction can occasionally bleed into the abstract/body when
     # PDF text columns are interleaved. Treat sentence-like research prose as
     # invalid so contaminated metadata is refreshed instead of entering reports.
-    prose_pattern = re.compile(
+    strong_prose_pattern = re.compile(
         r"\b("
         r"abstract|introduction|keywords?|while|whereas|however|therefore|"
-        r"paper|propos(?:e|ed|es|ing)|method|approach|network|model|"
-        r"dataset|image|images|pixels?|patch|patches|segmentation|"
-        r"classification|detection|experiments?|results?|performance|"
-        r"capture|learn(?:ing)?|strategy|benchmark|supported|grants?|"
+        r"paper|propos(?:e|ed|es|ing)|method|approach|dataset|"
+        r"experiments?|results?|capture|learn(?:ing)?|strategy|benchmark|supported|grants?|"
         r"foundation|funds?|project|computational|constraints?|resources?"
         r")\b",
+        re.IGNORECASE,
+    )
+    domain_prose_pattern = re.compile(
+        r"\b(network|model|images?|pixels?|patch|patches|segmentation|"
+        r"classification|detection|performance)\b",
         re.IGNORECASE,
     )
     for chunk in re.split(r"[；;]", normalized):
@@ -140,7 +169,9 @@ def is_valid_institution_text(text: str) -> bool:
             continue
         if len(part) > 180:
             return False
-        if prose_pattern.search(part):
+        if strong_prose_pattern.search(part):
+            return False
+        if domain_prose_pattern.search(part) and not INSTITUTION_KEYWORD_PATTERN.search(part):
             return False
         if re.search(r"\.\s+[A-Z][a-z]+", part):
             return False
@@ -148,10 +179,6 @@ def is_valid_institution_text(text: str) -> bool:
 
 
 def _heuristic_institutions(first_page_text: str) -> list[str]:
-    keyword_pattern = re.compile(
-        r"(universit|college|school|institut|academy|laborator|centre|center|department|hospital|faculty|laboratory|lab\b|国家|大学|学院|研究所|实验室|中心|医院)",
-        re.IGNORECASE,
-    )
     generic_institution_terms = {
         "academy",
         "center",
@@ -175,8 +202,8 @@ def _heuristic_institutions(first_page_text: str) -> list[str]:
             continue
         if re.search(r"^(abstract|摘要|keywords?|index terms|introduction)\b", line, re.IGNORECASE):
             continue
-        line = re.split(r"\b(?:Correspondence|Corresponding author|E-?mail)[:：]?\b", line, maxsplit=1, flags=re.IGNORECASE)[0]
-        if keyword_pattern.search(line) and not re.search(r"@", line):
+        line = _strip_email_tail(line)
+        if INSTITUTION_KEYWORD_PATTERN.search(line) and not re.search(r"@", line):
             parts = re.split(r"\s+(?=\d+\s+[A-Z])", line)
             for part in parts:
                 cleaned = re.sub(r"^\d+\s*", "", part).strip(" .")
@@ -185,7 +212,7 @@ def _heuristic_institutions(first_page_text: str) -> list[str]:
                     pending_prefix = ""
                 elif cleaned.casefold() in generic_institution_terms:
                     continue
-                if keyword_pattern.search(cleaned):
+                if INSTITUTION_KEYWORD_PATTERN.search(cleaned):
                     lines.append(cleaned)
                     continue
                 if re.fullmatch(r"[A-Z][A-Za-z&.-]+(?:\s+[A-Z][A-Za-z&.-]+){0,3}", cleaned):
@@ -231,29 +258,37 @@ def _compact_pdf_left_column(text: str) -> str:
 def _parse_ieee_footnote(footnote: str, known_authors: str) -> list[str]:
     """Parse IEEE-style "is with / was with" affiliation sentences."""
     institutions: list[str] = []
-    kw = re.compile(
-        r"(universit[yi]|college|school|institut|academy|laborator[yi]|"
-        r"centre|center|department|hospital|faculty|research|laboratory|"
-        r"labs?\b|labs,|forschungszentrum|jagiellonian|technology|"
-        r"大学|学院|研究所|实验室|中心|医院|研究院)",
-        re.IGNORECASE,
-    )
     compact = _compact_pdf_left_column(footnote)
+    with_lead = (
+        r"(?:(?:are|is|was|were)\s+(?:all\s+)?(?:also\s+)?"
+        r"(?:currently\s+)?(?:now\s+)?with|(?:while|now)\s+with)"
+    )
 
     for match in re.finditer(
-        r"(?:are|is|was|were)\s+(?:all\s+)?(?:currently\s+)?with\s+(.+?)"
+        with_lead + r"\s+(.+?)"
         r"(?=(?:\s+[A-Z][A-Za-z'.-]+(?:\s+[A-Z][A-Za-z'.-]+){0,5}\s+"
-        r"(?:are|is|was|were)\s+(?:all\s+)?(?:currently\s+)?with\b)"
-        r"|\s+E-?mail[:：]|\s*\(|\s*\[|\s*[–—]|\.$)",
+        + with_lead + r"\b)"
+        r"|\s+E-?mail[:：]|\s*\(\s*e-?mail[:：]|\s*\[|\s*[–—]|\.$)",
         compact,
         re.IGNORECASE,
     ):
         chunk = match.group(1).strip().rstrip(" ,;.")
         chunk = re.sub(r"\b\d{4,6}\b", "", chunk)
         chunk = re.sub(r"\s+", " ", chunk)
-        for phrase in re.split(r",\s*and\s+also\s+|,\s+and\s+|\band\s+also\b", chunk):
-            phrase = re.sub(r"^(?:also\s+)?with\s+", "", phrase.strip(), flags=re.IGNORECASE).rstrip(" ,;.")
-            if kw.search(phrase):
+        for phrase in re.split(
+            r",\s+and\s+(?:is\s+)?(?:also\s+)?(?:now\s+)?with\s+|"
+            r"\s+and\s+(?:is\s+)?(?:also\s+)?(?:now\s+)?with\s+|"
+            r",\s*and\s+also\s+|,\s+and\s+|\band\s+also\b",
+            chunk,
+            flags=re.IGNORECASE,
+        ):
+            phrase = re.sub(
+                r"^(?:is\s+)?(?:also\s+)?(?:now\s+)?with\s+",
+                "",
+                phrase.strip(),
+                flags=re.IGNORECASE,
+            ).rstrip(" ,;.")
+            if INSTITUTION_KEYWORD_PATTERN.search(phrase):
                 institutions.append(phrase)
 
     return _dedupe_institutions(institutions)
@@ -341,10 +376,12 @@ def _latex_to_plain(text: str) -> str:
     }
     for latex, unicode_char in accent_map.items():
         plain = plain.replace(latex, unicode_char)
+    plain = re.sub(r"\\\{[^{}]*\\\}\s*@\s*[\w.\-]+", " ", plain)
     plain = re.sub(r"\\(?:tt|small|footnotesize|scriptsize|hspace\*?)\s*(?:\{[^{}]*\})?", " ", plain)
     plain = re.sub(r"\\(?:url|href)\s*\{[^{}]*\}(?:\{[^{}]*\})?", " ", plain)
     plain = re.sub(r"\\[a-zA-Z]+\*?(?:\[[^\]]*\])?", " ", plain)
-    plain = re.sub(r"[{}$^_~]", " ", plain)
+    plain = re.sub(r"[{}]", "", plain)
+    plain = re.sub(r"[$^_~]", " ", plain)
     plain = re.sub(r"\\[\\,;:! ]", " ", plain)
     return re.sub(r"\s+", " ", plain).strip()
 
@@ -385,6 +422,25 @@ def _institutions_from_latex_affiliation_body(body: str) -> list[str]:
     if re.search(r"\b(?:supported|grant|foundation|funds?|project)\b", plain, re.IGNORECASE):
         return []
     return _heuristic_institutions(plain)
+
+
+def _institutions_from_latex_author_body(body: str) -> list[str]:
+    normalized = re.sub(r"\\\\(?:\[[^\]]*\])?", "\n", body or "")
+    normalized = re.sub(r"\\thanks\s*\{(?:[^{}]|\{[^{}]*\})*\}", " ", normalized)
+    pieces: list[str] = []
+    for chunk in re.split(r"\\(?:AND|And|and)\b", normalized):
+        lines = [line for line in chunk.splitlines() if line.strip()]
+        pieces.extend(lines or [chunk])
+
+    institutions: list[str] = []
+    for piece in pieces:
+        plain = _strip_email_tail(_latex_to_plain(piece))
+        plain = re.sub(r"^(?:[\d*†‡§¶]+(?:\s*,\s*)?)+", "", plain).strip(" ,;.")
+        if not INSTITUTION_KEYWORD_PATTERN.search(plain):
+            continue
+        institutions.extend(_heuristic_institutions(plain))
+
+    return _dedupe_institutions(institutions)
 
 
 def _read_latex_sources(source_path: Path) -> list[str]:
@@ -429,6 +485,10 @@ def extract_institutions_from_latex_source(source_path: Path | None) -> str:
         for command in ["thanks", "affil", "affiliation", "institute", "IEEEauthorblockA"]:
             for body in _extract_latex_command_bodies(source, command):
                 institutions.extend(_institutions_from_latex_affiliation_body(body))
+
+        if not institutions:
+            for body in _extract_latex_command_bodies(source, "author"):
+                institutions.extend(_institutions_from_latex_author_body(body))
 
         if institutions:
             break
