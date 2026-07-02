@@ -2,6 +2,41 @@
 
 最近三天日报（最新在前）：
 
+# [20260701](./202607/20260701.md)
+## 📌 今日概况
+
+今日共检索候选论文 17 篇；关键词+LLM 智能匹配遥感交叉论文 6 篇；最终纳入日报 6 篇。
+
+今日遥感研究呈现多模态融合与精细化建模两大趋势。视觉定位任务引入过程监督与锚点引导推理，提升复杂场景理解能力。无人机图像分析聚焦质量评估与高效检测微调，结合视觉-语言模型。三维重建方面，轨道射线条件约束的3D基础模型提升了卫星多视角重建精度。此外，不确定性感知的树高变化回归与极化SAR土壤水分反演，体现了对物理过程与量测不确定性的深入建模。
+
+## ✨ 今日亮点
+
+- 多模态大模型在遥感视觉定位中引入过程监督机制
+- 无人机图像分析结合视觉-语言模型实现质量评估与高效检测
+- 卫星三维重建与森林动态监测强调物理约束与不确定性建模
+
+## 🗂 今日文章列表
+
+| 标题 | 作者 | 单位 | 一句话概括 | Issue |
+|---|---|---|---|---|
+| [20260701] GeoSearcher: Anchor-Guided Progressive Reasoning for Remote Sensing Visual Grounding with Process Supervision | Wang Dianyu, Zhang Yidan, Zhang Peirong, Li Xuyang, Liu Xiaoxuan, Wang Lei | School of Electronic, Electrical and Communication Engineering, University of Chinese Academy of Sciences, Beijing, China ( | GeoSearcher提出锚点引导渐进推理，实现遥感视觉定位的过程监督。 | [#825](https://github.com/thinson/RS-PaperClaw/issues/825) |
+| [20260701] Uncertainty-aware tree height change regression | Gaber Max, Gominski Dimitri, Jaime C. Revenga, Oehmcke Stefan, Fensholt Rasmus, Brandt Martin | Department of Mathematical Sciences, University of Copenhagen；Department of Computer Science and Electrical Engineering, University of Rostock；Department of Computer Science, University of Copenhagen | 不确定性感知回归模型用于树高变化估计，提升森林动态监测可靠性。 | [#826](https://github.com/thinson/RS-PaperClaw/issues/826) |
+| [20260701] EO-VGGT: Orbital Ray-Conditioned 3D Foundation Models for Satellite Multi-View Reconstruction | Luo Qiyan, Pi Yingdong, Wen Lekang, Yang Jie, Wang Xiaoyu, Zhang Haiming, Wang Mi | State Key Laboratory of Information Engineering in Surveying, Mapping and Remote Sensing, Wuhan University；Hubei Luojia Laboratory | EO-VGGT利用轨道射线条件约束，构建卫星多视角重建3D基础模型。 | [#827](https://github.com/thinson/RS-PaperClaw/issues/827) |
+| [20260701] DroneIQA-VLE: Multi-Task Drone Image Quality Assessment via Vision-Language Ensemble | Sun Wei, Zhang Weixia, Zhan Hongjian, Lu Mingkai, Gao Yixuan, Zhai Guangtao | East China Normal University；Shanghai Jiao Tong University；To promote research on UAV-oriented quality modeling | DroneIQA-VLE通过视觉-语言集成实现无人机图像多任务质量评估。 | [#828](https://github.com/thinson/RS-PaperClaw/issues/828) |
+| [20260701] DroneFINE: Domain-Aware Parameter-Efficient Fine-Tuning of Vision-Language Detectors for Drone Images | Wu Ke, Zhang Yanan, Gao Yingjie, Li Wenhao, Zhou Chenyu, Ma XinZhu, Chen Jiaxin, Huang Di | National College for Excellent Engineers, Beihang University, Beijing, China；School of Computer Science and Engineering, Beihang University, Beijing, China；School of Computer Science and Information Engineering, Hefei University of；State Key Laboratory of Virtual Reality Technology and Systems, Beihang；University, Beijing, China；Innovation Center for Intelligent System Cognition and Decision-Making, Beijing；Information Science Academy of China Electronics Technology Group Corporation | DroneFINE提出域感知参数高效微调，适配无人机图像的视觉语言检测。 | [#829](https://github.com/thinson/RS-PaperClaw/issues/829) |
+| [20260701] Polarimetric SAR Model Fitting for Soil Moisture Retrieval: Study of PALSAR-2 data over a Heterogeneous Mine Environment in Finland | Antropov Oleg, Hamedianfar Alireza, Molinier Matthieu, Salmela Ulla, Kukkula Hanna, Seitsonen Lauri, Liwata-Kenttälä Pauliina, Middleton Maarit | VTT Technical Research Centre of Finland, Espoo, Finland | 极化SAR半经验模型用于芬兰矿区土壤水分反演，分析PALSAR-2时序数据。 | [#830](https://github.com/thinson/RS-PaperClaw/issues/830) |
+
+## 🔎 观察
+
+- 视觉-语言模型正从通用场景向遥感垂直领域渗透，驱动定位、检测与质量评估任务革新。
+- 遥感基础模型发展更注重物理先验（如轨道几何、极化散射）与不确定性量化，提升可解释性。
+
+---
+
+Powered by OpenClaw🦞
+
+---
+
 # [20260630](./202606/20260630.md)
 ## 📌 今日概况
 
@@ -77,37 +112,6 @@ Powered by OpenClaw🦞
 
 - 多模态融合与跨传感器学习成为遥感应用的主流技术路径。
 - 基础模型在农业等垂直领域的迁移评估正受到更多关注。
-
----
-
-Powered by OpenClaw🦞
-
----
-
-# [20260628](./202606/20260628.md)
-## 📌 今日概况
-
-今日共检索候选论文 3 篇；关键词+LLM 智能匹配遥感交叉论文 2 篇；最终纳入日报 2 篇。
-
-今日遥感AI研究聚焦于图像分割中的不确定性量化与先验知识融合。一篇论文提出可扩展贝叶斯空间混合模型，用于遥感图像分割并量化不确定性；另一篇则利用土地覆盖先验知识提升SAR洪水分割的泛化能力，展示了先验信息在深度学习中的价值。
-
-## ✨ 今日亮点
-
-- 贝叶斯空间混合模型实现遥感图像分割与不确定性量化
-- 土地覆盖先验提升SAR洪水分割的跨骨干泛化能力
-- 先验知识融合成为遥感深度学习新趋势
-
-## 🗂 今日文章列表
-
-| 标题 | 作者 | 单位 | 一句话概括 | Issue |
-|---|---|---|---|---|
-| [20260628] Scalable Bayesian Spatial Mixture Modelling for Remote Sensing Image Segmentation | Bao Khanh Nguyen, Cameron Iain, Balocchi Cecilia, Sell Torben | School of Mathematics and Maxwell Institute for Mathematical；Sciences, University of Edinburgh, Edinburgh, UK | 提出可扩展贝叶斯空间混合模型用于遥感图像分割与不确定性量化。 | [#796](https://github.com/thinson/RS-PaperClaw/issues/796) |
-| [20260628] Beyond Backscatter: AlphaEarth Land-Cover Priors for Rapid SAR Flood Segmentation Across Foundation Backbones | Thasma Sanjay, Ho Yu-Hsuan, Mostafavi Ali | Department of Computer Science and Engineering, Texas A\&M University, College Station, TX (；the Urban Resilience.AI Lab, Zachry Department of Civil and Environmental Engineering, Texas A\&M University, College Station, TX ( | 利用土地覆盖先验知识提升SAR洪水分割在不同骨干网络上的性能。 | [#797](https://github.com/thinson/RS-PaperClaw/issues/797) |
-
-## 🔎 观察
-
-- 贝叶斯方法在遥感分割中兼顾精度与不确定性评估，实用性强。
-- 先验知识引导的深度学习模型在SAR数据上展现出更强的鲁棒性。
 
 ---
 
