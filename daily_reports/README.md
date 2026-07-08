@@ -2,6 +2,43 @@
 
 最近三天日报（最新在前）：
 
+# [20260707](./202607/20260707.md)
+## 📌 今日概况
+
+今日共检索候选论文 10 篇；关键词+LLM 智能匹配遥感交叉论文 8 篇；最终纳入日报 8 篇。
+
+今日遥感AI研究呈现多模态融合与物理感知并进趋势。红外遥感视觉-语言模型在CLIP适配与对抗攻击方面取得进展；同时，物理信息驱动的森林声学模拟、无人机辅助6G网络服务、盐沼植被监测及不确定性感知的跨模态检索等方向均有新工作，体现了遥感AI向精细化、鲁棒化发展的特点。
+
+## ✨ 今日亮点
+
+- 红外遥感视觉-语言模型CLIP适配与指令微调研究
+- 物理信息驱动的森林声学模拟用于生物遥感
+- 不确定性感知的跨模态遥感图像-文本检索
+
+## 🗂 今日文章列表
+
+| 标题 | 作者 | 单位 | 一句话概括 | Issue |
+|---|---|---|---|---|
+| [20260707] MonoIR-RS: Infrared Remote Sensing Vision-Language Learning with CLIP and VLM Adaptation | Han Jiaju, Yaqi Ma, Chai Yahui, Sun Xuemeng, Li Xin, Zhang Qike, Zhao Yingying, Chen Xiang, Yang Luwei, Hu Chengyin, Long Jiahuan | China University of Petroleum-Beijing at Karamay, Karamay, Xinjiang, China；Guizhou University, Guiyang, China；Shenzhen Research Institute of Big Data, Shenzhen, China；Shanghai Jiao Tong University, Shanghai, China | 提出MonoIR-RS，通过CLIP与VLM适配实现红外遥感视觉-语言学习。 | [#857](https://github.com/thinson/RS-PaperClaw/issues/857) |
+| [20260707] Life Style Levels: Neighborhood Delineation using Geospatial Data | Kulkarni Srivatsa, Banerjee Debarag | L&T Finance | 利用地理空间数据划分生活方式等级，实现城市邻里精细刻画。 | [#858](https://github.com/thinson/RS-PaperClaw/issues/858) |
+| [20260707] AirflowAttack: Thermal-Airflow Adversarial Perturbations against Infrared Remote-Sensing Vision-Language Models | Su Cong, Han Jiaju, Sun Xuemeng, Hu Chengyin, Zhang Qike, Guo Jiujiang, Wei Yiwei, Long Jiahuan | China University of Petroleum-Beijing at Karamay, Karamay, Xinjiang, China；Tianjin University, Tianjin, China；Shanghai Jiao Tong University, Shanghai, China | 设计热气流对抗扰动，攻击红外遥感视觉-语言模型。 | [#859](https://github.com/thinson/RS-PaperClaw/issues/859) |
+| [20260707] ForestIR: Physics-Informed Forest Sound Simulation for Array-Based Bioacoustic Remote Sensing | Shen Xin, Jennifer N. Kampe, Changwoo J. Lee, Scherting Braden, Somervuo Panu, Lehtiö Ari, Sandro von Brandenburg, Nokelainen Ossi, Ovaskainen Otso, David B. Dunson | Department of Statistical Science, Duke University, Durham, NC, USA；Department of Biological and Environmental Science, University of Jyväskylä, Jyväskylä, Finland；Organismal and Evolutionary Biology Research Programme, Faculty of Biological and Environmental；Sciences, University of Helsinki, Helsinki, Finland；Digital Services, University of Jyväskylä, Jyväskylä, Finland；Open Science Centre, University of Jyväskylä, Jyväskylä, Finland | 提出ForestIR，物理信息驱动森林声学模拟用于阵列生物遥感。 | [#860](https://github.com/thinson/RS-PaperClaw/issues/860) |
+| [20260707] Quality-Aware Personalized AI Service Provisioning in UAV-Assisted 6G Networks | Farhoudi Mohammad, Shokrnezhad Masoud, Taleb Tarik | Oulu University, Finland；Ruhr University Bochum (RUB), Germany | 在无人机辅助6G网络中实现质量感知的个性化AI服务部署。 | [#861](https://github.com/thinson/RS-PaperClaw/issues/861) |
+| [20260707] EcoVision: AI-Powered Drone Imaging for Salt Marsh Vegetation Monitoring and Dominance Mapping | Onyenonachi Innocent, Peter J. Lawerance, Kanwal Nadia | School of Computer Science and Mathematics；School of Life Science | EcoVision利用AI无人机成像进行盐沼植被监测与优势种制图。 | [#862](https://github.com/thinson/RS-PaperClaw/issues/862) |
+| [20260707] Uncertainty-Aware Cross-Modal Remote Sensing Image-Text Retrieval via Evidential Learning | Wang Zhuoyue, Wang Xueqian, Li Gang, Li Chengxi, Liu Yongpan, Ban Yifang | Department of Electronic Engineering, Despite the notable progress achieved by current CMRSITR Tsinghua University, Beijing, China；Department of Electronic Engineering, Tsinghua University, Beijing, China；State Key Laboratory of Space Network and Communications, Tsinghua University, Beijing, China (；School of Electrical Engineering and Computer Science, fulfill these idealized conditions；the Division of Geoinformatics, School of Architecture and major source of uncertainty arises from atmospheric and the Built Environment, KTH Royal Institute of Technology | 基于证据学习实现不确定性感知的跨模态遥感图像-文本检索。 | [#863](https://github.com/thinson/RS-PaperClaw/issues/863) |
+| [20260707] SpecTrack: Spectral Prompt Guided Adaptive Experts for Multispectral Object Tracking | Tan Xingyu, Qin Yunrong, Hu Mengjie | Beijing University of Posts and Telecommunications | SpecTrack采用光谱提示引导的混合专家模型进行多光谱目标跟踪。 | [#864](https://github.com/thinson/RS-PaperClaw/issues/864) |
+
+## 🔎 观察
+
+- 红外遥感与视觉-语言模型结合成为热点，涵盖适配与对抗攻击两方面。
+- 物理信息与遥感融合趋势明显，如森林声学模拟和热气流扰动研究。
+
+---
+
+Powered by OpenClaw🦞
+
+---
+
 # [20260706](./202607/20260706.md)
 ## 📌 今日概况
 
@@ -60,52 +97,6 @@ Powered by OpenClaw🦞
 
 - 时序与多模态融合成为遥感智能分析的关键技术趋势
 - 轻量化与高效检测在无人机遥感应用中持续受到关注
-
----
-
-Powered by OpenClaw🦞
-
----
-
-# [20260704](./202607/20260704.md)
-## 📌 今日概况
-
-今日共检索候选论文 10 篇；关键词+LLM 智能匹配遥感交叉论文 9 篇；最终纳入日报 8 篇。
-
-今日遥感AI研究聚焦于轻量化与高精度分割、无人机多模态感知及三维重建。多篇工作提出专用数据集与训练-free方法，推动遥感目标分割与低空通信发展。扩散模型与Transformer架构在显著性检测与生物量估计中展现潜力。
-
-## ✨ 今日亮点
-
-- NWPU-Traffic数据集推动遥感交通目标实例分割
-- SharpSplat利用边缘正则化提升无人机建筑三维重建
-- GeoSAM-Lite实现轻量化星上遥感分割
-
-## 🗂 今日文章列表
-
-| 标题 | 作者 | 单位 | 一句话概括 | Issue |
-|---|---|---|---|---|
-| [20260704] A Large-Scale Dataset and a New Method for RemoteSensing Traffic Object Segmentation | Yang Zhigang, Yao Huiguang, Tian Linmao, Li Qiang, Wang Qi | a School of Artificial Intelligence, OPtics and ElectroNics (iOPEN), Northwestern Polytechnical；University, Xi’an, 710072, Shaanxi, China；b School of Computer Science, Northwestern Polytechnical University, Xi’an, 710072, Shaanxi, China；c School of Software, Northwestern Polytechnical University, Xi’an, 710072, Shaanxi, China | 提出大规模NWPU-Traffic数据集及交通目标实例分割方法 | [#839](https://github.com/thinson/RS-PaperClaw/issues/839) |
-| [20260704] SharpSplat: Edge-Regularized 3D Gaussian Splatting for High Fidelity Urban Building Reconstruction from UAV images | Vaid Porus, Chopra Shivam, Kumar Vaibhav | uations across campus environments, dense urban centers, and | SharpSplat用边缘正则化3D高斯泼溅实现高保真建筑重建 | [#840](https://github.com/thinson/RS-PaperClaw/issues/840) |
-| [20260704] GeoSelect: Spatial-Program Execution for Training-Free Referring Remote Sensing Image Segmentation | Jiang Yuhang, Deng Guohui, Xu Miaozhong, Ruan Chao, Zhao Jinling, Huang Linsheng | School of Internet, Anhui University, Hefei, China；the National Engineering Research Center for Agro-Ecological Big Data Analysis \& Application, Anhui University, Hefei, China；State Key Laboratory of Information Engineering in Surveying, Mapping and Remote Sensing, Wuhan University, Wuhan, China | GeoSelect通过空间程序执行实现免训练遥感图像分割 | [#841](https://github.com/thinson/RS-PaperClaw/issues/841) |
-| [20260704] LAMBDA: A Low-Altitude Multimodal Base Dataset for UAV Sensing and Communication | Zhou Lin, Rao Peichuan, Zhang Chenshuo, Mo Jianhua, Sun Shu, Chen Zhiyong, Tao Meixia | Research on low-altitude integrated sensing and communication (ISAC) requires aligned；the same platforms and within the same networks, giving rise to a key research area known as；School of Information Science and Electronic Engineering, Shanghai Jiao Tong University, Shanghai, China | LAMBDA提供低空多模态数据集用于无人机感知与通信 | [#842](https://github.com/thinson/RS-PaperClaw/issues/842) |
-| [20260704] TRISTAR: Triple-Signal Stair Recognition and Vision-Only Indoor Navigation for Search-and-Rescue Micro-UAVs | Gîngu Octavian, Spînu Stelian | International Student Conference, Military Technical Academy, Bucharest, Romania；Military Technical Academy ``Ferdinand I'', Bucharest, Romania | TRISTAR实现微无人机基于单目视觉的楼梯识别与导航 | [#843](https://github.com/thinson/RS-PaperClaw/issues/843) |
-| [20260704] GeoSAM-Lite: A Lightweight Foundation Model for Onboard Remote Sensing Segmentation | Wang Yongcong, Zhang Jie, Jiang Rui, Yang Xubing, Yun Ting, Zhang Li | College of Information Science and Technology \& Artificial Intelligence, Nanjing Forestry University, Nanjing, China (；College of Telecommunications and Information Engineering, Nanjing University of Posts and Telecommunications, Nanjing, China | GeoSAM-Lite是面向星上分割的轻量级基础模型 | [#844](https://github.com/thinson/RS-PaperClaw/issues/844) |
-| [20260704] IPDiff: Diffusion-driven ORSI Salient Object Detection with Information Reconstruction and Multi-Prior Guidance | Li Gongyang, Bai Zhen, Cong Runmin, Zeng Dan, Lin Weisi, Zhang Xiao-Ping | ing, Shanghai University, Shanghai, China；School of Control Science and Engineering, Shandong；University, Jinan, China；School of Computer Science and Engineering, Nanyang；Technological University, Singapore；Shenzhen Key Laboratory of Ubiquitous Data Enabling, Tsinghua Shenzhen International Graduate School；Tsinghua University, Shenzhen, China Optical Remote Sensing Images (ORSIs) refer to images | IPDiff用扩散模型与多先验引导进行遥感显著性检测 | [#845](https://github.com/thinson/RS-PaperClaw/issues/845) |
-| [20260704] Phase-Preserving Trimodal Transformer for Tropical Forest Biomass Estimation Using Optical and PolInSAR Data | Luiz Felipe Parente Santiago, Rosiane Rodrigues de Freitas, Daniel Rodrigues dos Santos, Ferrari Felipe | Institute of Computing (IComp), Federal University of Amazonas (UFAM), Manaus, Brazil；Brazilian Army Research Institute in the Amazon (IPEAM), Manaus, Brazil；Military Institute of Engineering (IME), Rio de Janeiro, Brazil | 相位保持三模态Transformer融合光学与PolInSAR估测森林生物量 | [#846](https://github.com/thinson/RS-PaperClaw/issues/846) |
-
-## ⚠️ 未纳入日报的匹配论文
-
-以下论文通过关键词/LLM 筛选，但在处理过程中失败未纳入日报。点击 arXiv 链接可查看原文。
-
-| 标题 | arXiv | 失败原因 |
-|------|-------|----------|
-| Exploring SAM Supervision for Fine-Grained UAV Target Segmentation under Data Scarcity | [2607.03754v1](https://arxiv.org/abs/2607.03754v1) | 质检未通过: 单位为空或无效 |
-
-
-## 🔎 观察
-
-- 轻量化与星上处理成为遥感分割模型落地的重要趋势
-- 多模态数据融合（光学、SAR、通信信号）在低空与森林应用中加速
 
 ---
 
