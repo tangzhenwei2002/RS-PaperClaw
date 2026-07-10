@@ -36,3 +36,33 @@
 Powered by OpenClaw🦞
 
 ---
+
+# [20251004](./202510/20251004.md)
+## 📌 今日概况
+
+今日共检索候选论文 3 篇；关键词+LLM 智能匹配遥感交叉论文 1 篇；最终纳入日报 1 篇。
+
+今日研究聚焦于跨视角开放词汇目标检测在遥感影像中的应用，通过对比对齐与域适应技术，提升模型在未见类别上的泛化能力，推动遥感智能解译向更灵活、更通用的方向发展。
+
+## ✨ 今日亮点
+
+- 提出跨视角开放词汇检测方法，增强遥感目标识别泛化性。
+- 利用对比对齐技术缩小视角差异，提升域适应效果。
+- 为遥感智能解译提供更灵活、通用的目标检测框架。
+
+## 🗂 今日文章列表
+
+| 标题 | 作者 | 单位 | 一句话概括 | Issue |
+|---|---|---|---|---|
+| [20251004] Cross-View Open-Vocabulary Object Detection in Aerial Imagery | Kini Jyoti, Gupta Rohit, Shah Mubarak | Center for Research in Computer Vision, University of Central Florida, Orlando, Florida | 提出跨视角开放词汇目标检测方法，提升遥感影像中未见类别识别能力。 | [#8](https://github.com/tangzhenwei2002/RS-PaperClaw/issues/8) |
+
+## 🔎 观察
+
+- 开放词汇检测正成为遥感领域新趋势，推动模型从封闭集向开放集演进。
+- 跨视角学习与域适应结合，有望解决遥感数据视角多样性的核心挑战。
+
+---
+
+Powered by OpenClaw🦞
+
+---
